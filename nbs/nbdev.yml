@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "whorlmap-paper"
+  site-url: "https://sangyu.github.io/whorlmap-paper"
+  description: ""
+  repo-branch: main
+  repo-url: "https://github.com/sangyu/whorlmap-paper"
