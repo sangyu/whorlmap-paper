@@ -400,27 +400,72 @@ with warnings.catch_warnings():
     )
 plt.close(_fig_tmp)
 
-vabs = float(mean_df.abs().max().max()) * 1.05
-# Use simple Normalize for the colorbar — TwoSlopeNorm + empty ScalarMappable
-# has a known rendering bug in mpl 3.10 that produces a blank gradient.
+vabs = 1.5   # fixed colorbar range ±1.5
 from matplotlib.colors import Normalize
 from matplotlib.colorbar import ColorbarBase
+from matplotlib.patches import Rectangle as _Rect
+from matplotlib.lines import Line2D as _L2D
+from scipy.stats import gaussian_kde as _gkde
 shared_norm = Normalize(vmin=-vabs, vmax=vabs)
 
-# Shared layout constants (fractions of figure): 13 rows × 20 cols grid
-FIGSIZE   = (14, 7)
-HAX_RECT  = [0.14, 0.21, 0.71, 0.72]
-CBAR_RECT = [0.87, 0.21, 0.022, 0.72]
-
-def _add_shared_cbar(cax):
-    cb = ColorbarBase(cax, cmap=CMAP, norm=shared_norm, orientation='vertical')
+def _add_shared_cbar(cax, orientation='horizontal'):
+    cb = ColorbarBase(cax, cmap=CMAP, norm=shared_norm, orientation=orientation)
     cb.set_label('Mean diff F−M (log₂TPM+1)', fontsize=8)
-    cb.set_ticks([-round(vabs, 1), 0, round(vabs, 1)])
+    cb.set_ticks([-1.5, -0.5, 0, 0.5, 1.5])
     cb.ax.tick_params(labelsize=7)
 
-# ── Panel Ci — whorlmap ───────────────────────────────────────────────────────
+# ── Highlighted pairs ─────────────────────────────────────────────────────────
+# Pair A (blue):   a1=SST/Spinal Cord row=12 col=7,  a2=FKBP5/Putamen row=7 col=18
+# Pair B (maroon): b1=AIF1/SN row=11 col=16,         b2=CYP19A1/Caudate row=6 col=15
+# Whorlmap: each cell = 21 data units; Cell(r,c) → x=[c*21,(c+1)*21], y=[r*21,(r+1)*21]
+_N_COLS_G  = len(RIGHT_GENES)
+_PAIR_COL  = ['#1A5276', '#6E2F1A']   # blue=A, maroon=B
+
+# (row, col, pair_idx, within_pair_idx, label)  — display order: a1, a2, [gap], b1, b2
+_ORDERED_CELLS = [
+    (12,  7, 0, 0, 'a1'),   # SST/SC          → top sparkline
+    ( 7, 18, 0, 1, 'a2'),   # FKBP5/Putamen   → 2nd
+    (11, 16, 1, 0, 'b1'),   # AIF1/SN         → 3rd (after pair gap)
+    ( 6, 15, 1, 1, 'b2'),   # CYP19A1/Caudate → bottom
+]
+
+# Bootstrap arrays: pair A=[a1, a2], pair B=[b1, b2]
+_pair_bs = {
+    0: [np.asarray(multi_gtex.bootstraps[12*_N_COLS_G +  7]),   # a1 SST/SC
+        np.asarray(multi_gtex.bootstraps[ 7*_N_COLS_G + 18])],  # a2 FKBP5/Put
+    1: [np.asarray(multi_gtex.bootstraps[11*_N_COLS_G + 16]),   # b1 AIF1/SN
+        np.asarray(multi_gtex.bootstraps[ 6*_N_COLS_G + 15])],  # b2 CYP19A1/Caud
+}
+_pair_xlims = {}
+_pair_ymax  = {}
+for _pi, _blist in _pair_bs.items():
+    _lo = min(_b.min() - 0.3*np.std(_b) for _b in _blist)
+    _hi = max(_b.max() + 0.3*np.std(_b) for _b in _blist)
+    _pair_xlims[_pi] = (_lo, _hi)
+    _xr = np.linspace(_lo, _hi, 300)
+    _pair_ymax[_pi] = max(_gkde(_b, bw_method='silverman')(_xr).max() for _b in _blist) * 1.1
+
+# ── Shared figure geometry (Ci and Cii use the same dimensions & heatmap rect) ─
+FIGSIZE_BOTH = (16.5, 8)
+HAX_RECT     = [0.09, 0.18, 0.55, 0.77]
+CBAR_RECT    = [0.09, 0.035, 0.275, 0.038]
+
+# Sparklines: a1, a2 | gap | b1, b2 — top to bottom
+_H_SPARK    = 0.17;  _SPARK_X = 0.685;  _SPARK_W = 0.26
+_SG         = 0.02   # small gap within pair
+_LG         = 0.06   # large gap between pairs
+_SB         = HAX_RECT[1]   # 0.18 — bottom of heatmap = bottom of bottom sparkline
+SPARK_RECTS = [
+    [_SPARK_X, _SB + 3*_H_SPARK + 2*_SG + _LG, _SPARK_W, _H_SPARK],  # a1 (top)
+    [_SPARK_X, _SB + 2*_H_SPARK + 1*_SG + _LG, _SPARK_W, _H_SPARK],  # a2
+    [_SPARK_X, _SB + 1*_H_SPARK + 1*_SG,        _SPARK_W, _H_SPARK],  # b1
+    [_SPARK_X, _SB,                              _SPARK_W, _H_SPARK],  # b2 (bottom)
+]
+
+# ── Panel Ci — whorlmap with sparkline insets ────────────────────────────────
 print("Generating panel_ci …")
-fig_ci = plt.figure(figsize=FIGSIZE)
+
+fig_ci     = plt.figure(figsize=FIGSIZE_BOTH)
 ax_ci      = fig_ci.add_axes(HAX_RECT)
 cbar_ax_ci = fig_ci.add_axes(CBAR_RECT)
 with warnings.catch_warnings():
@@ -432,15 +477,77 @@ with warnings.catch_warnings():
 ax_ci.set_aspect('equal')
 for _c in ax_ci.collections:
     _c.set_rasterized(True)
-_add_shared_cbar(cbar_ax_ci)
+_add_shared_cbar(cbar_ax_ci, orientation='horizontal')
+
+_mn = mean_df.values
+
+for _idx, (_ri, _ci, _pi, _wi, _lbl) in enumerate(_ORDERED_CELLS):
+    _mean_val  = float(_mn[_ri, _ci])
+    _bs        = _pair_bs[_pi][_wi]
+    _hl_col    = _PAIR_COL[_pi]
+    _cell_rgba = CMAP(shared_norm(_mean_val))
+
+    # Highlight rectangle on whorlmap
+    _cx0, _cy0 = _ci * 21, _ri * 21
+    ax_ci.add_patch(_Rect((_cx0, _cy0), 21, 21,
+                          fill=False, edgecolor=_hl_col, linewidth=2.0, zorder=12))
+    ax_ci.text(_cx0 + 2.5, _cy0 + 5, _lbl,
+               fontsize=5.5, fontweight='bold', color=_hl_col, zorder=13,
+               va='top', ha='left')
+
+    # Sparkline axes
+    _sr  = SPARK_RECTS[_idx]
+    _sax = fig_ci.add_axes(_sr)
+
+    _xlo, _xhi = _pair_xlims[_pi]
+    _xr = np.linspace(_xlo, _xhi, 300)
+    _yr = _gkde(_bs, bw_method='silverman')(_xr)
+    _sax.fill_between(_xr, _yr, color=_cell_rgba, alpha=0.65)
+    _sax.plot(_xr, _yr, color=_hl_col, lw=0.9)
+    _sax.axvline(0,          color='#aaaaaa', lw=0.6, ls=(0,(3,3)))
+    _sax.axvline(_mean_val,  color=_hl_col,   lw=1.2)
+    _sax.set_xlim(_xlo, _xhi);  _sax.set_ylim(0, _pair_ymax[_pi])
+    _sax.set_yticks([]);  _sax.set_xticks([0])
+    _sax.set_xticklabels(['0'], fontsize=5, color='#888')
+    for _sp in ['top', 'right', 'left', 'bottom']:
+        _sax.spines[_sp].set_visible(False)
+    _sax.tick_params(length=2, width=0.5, pad=1)
+    # Label (top-left) + gene/region caption (below)
+    _sax.text(0.02, 0.97, _lbl, transform=_sax.transAxes,
+              fontsize=7, fontweight='bold', ha='left', va='top', color=_hl_col)
+    _sax.text(0.5, -0.15, f'{RIGHT_GENES[_ci]} · {region_order[_ri]}',
+              transform=_sax.transAxes, fontsize=5.5, ha='center', va='top',
+              style='italic', color='#444')
+
+# Orthogonal connections: horizontal along row → short segment to sparkline
+fig_ci.canvas.draw()
+
+def _d2f(_xd, _yd):
+    _disp = ax_ci.transData.transform((_xd, _yd))
+    return tuple(fig_ci.transFigure.inverted().transform(_disp))
+
+_xlim_r = ax_ci.get_xlim()[1]
+
+for _idx, (_ri, _ci, _pi, _wi, _lbl) in enumerate(_ORDERED_CELLS):
+    _hl_col = _PAIR_COL[_pi]
+    _sr = SPARK_RECTS[_idx]
+    _p1 = _d2f((_ci + 1) * 21, _ri * 21 + 10.5)   # cell right-middle
+    _p2 = _d2f(_xlim_r,         _ri * 21 + 10.5)   # heatmap right edge
+    _p3 = (_sr[0], _sr[1] + _sr[3] / 2)             # sparkline left-middle
+    for _xs, _ys in [([_p1[0], _p2[0]], [_p1[1], _p2[1]]),
+                     ([_p2[0], _p3[0]], [_p2[1], _p3[1]])]:
+        fig_ci.add_artist(_L2D(_xs, _ys, transform=fig_ci.transFigure,
+                               color=_hl_col, lw=0.85, zorder=15, solid_capstyle='round'))
+
 fig_ci.savefig(IMAGES / 'panel_ci.svg', dpi=600)
 fig_ci.savefig(IMAGES / 'panel_ci.png', dpi=600)
 plt.close(fig_ci)
 print("  saved panel_ci.svg")
 
-# ── Panel Cii — scalar heatmap ────────────────────────────────────────────────
+# ── Panel Cii — scalar heatmap, same geometry as Ci, with matching labels ────
 print("Generating panel_cii …")
-fig_cii = plt.figure(figsize=FIGSIZE)
+
+fig_cii     = plt.figure(figsize=FIGSIZE_BOTH)
 ax_cii      = fig_cii.add_axes(HAX_RECT)
 cbar_ax_cii = fig_cii.add_axes(CBAR_RECT)
 sns.heatmap(
@@ -457,7 +564,17 @@ for _c in ax_cii.collections:
 ax_cii.set_title('Scalar mean (distribution information lost)', fontsize=10)
 ax_cii.tick_params(axis='x', rotation=45, labelsize=7)
 ax_cii.tick_params(axis='y', rotation=0,  labelsize=7)
-_add_shared_cbar(cbar_ax_cii)
+_add_shared_cbar(cbar_ax_cii, orientation='horizontal')
+
+# Same highlight boxes + labels as Ci (seaborn coords: cell (r,c) at x=[c,c+1], y=[r,r+1])
+for _ri, _ci, _pi, _wi, _lbl in _ORDERED_CELLS:
+    _hl_col = _PAIR_COL[_pi]
+    ax_cii.add_patch(_Rect((_ci, _ri), 1, 1,
+                           fill=False, edgecolor=_hl_col, linewidth=2.0, zorder=12))
+    ax_cii.text(_ci + 0.06, _ri + 0.18, _lbl,
+                fontsize=6, fontweight='bold', color=_hl_col, zorder=13,
+                va='top', ha='left')
+
 fig_cii.savefig(IMAGES / 'panel_cii.svg', dpi=600)
 fig_cii.savefig(IMAGES / 'panel_cii.png', dpi=600)
 plt.close(fig_cii)
