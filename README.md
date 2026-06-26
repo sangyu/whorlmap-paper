@@ -4,7 +4,7 @@ Analysis and figures for a technical paper documenting the design and applicatio
 
 Whorlmap is a compact heatmap design for high-dimensional comparisons where each cell encodes a full bootstrap/effect-size distribution as a tiny spiral, rather than collapsing uncertainty into a single color. It lets readers scan many treatment–outcome contrasts at once while still seeing direction, magnitude, and uncertainty inside each cell.
 
-<img src="assets/figure1_preview.png" width="600">
+<img src="assets/figure1_assembly.png" width="600">
 
 ## Reproduce Figure 1
 
