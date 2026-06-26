@@ -1,14 +1,30 @@
 name: Deploy to GitHub Pages
 
-permissions:
-  contents: write
-  pages: write
-
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps: [uses: answerdotai/workflows/quarto-ghp3@master]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install jupyter nbconvert
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+
+      - uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

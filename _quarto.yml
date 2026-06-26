@@ -1,0 +1,28 @@
+project:
+  type: website
+
+website:
+  title: "Whorlmap"
+  site-url: "https://sangyu.github.io/whorlmap-paper"
+  description: "Analysis and figures for the whorlmap paper"
+  version: "2026.06"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: nbs/figure1.ipynb
+        text: Figure 1
+      - href: nbs/helpers/survey.ipynb
+        text: Data Pipeline
+      - href: nbs/helpers/make_cache.ipynb
+        text: Cache Builder
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    code-tools: true
+
+execute:
+  enabled: false   # render stored cell outputs only; re-run notebooks locally
