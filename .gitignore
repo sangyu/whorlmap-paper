@@ -150,3 +150,24 @@ checklink/cookies.txt
 
 # Quarto
 .quarto
+_site/
+_freeze/
+
+# GTEx raw source files (too large for git — see nbs/helpers/survey.ipynb to download)
+nbs/gtex_data/GTEx_gene_tpm.gct.gz
+nbs/gtex_data/GTEx_SampleAttributes.txt
+nbs/gtex_data/GTEx_SubjectPhenotypes.txt
+nbs/gtex_data/gene_expr.pkl
+nbs/gtex_data/figure1_cache.pkl.gz
+nbs/gtex_survey*.log
+
+# Generated figure images (all rebuilt by nbs/figure1.ipynb — not source files)
+nbs/images/
+
+# Scratchpad files
+nbs/handoff.md
+nbs/compare.png
+nbs/compare.svg
+
+/.quarto/
+**/*.quarto_ipynb

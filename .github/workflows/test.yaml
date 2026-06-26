@@ -1,7 +1,30 @@
 name: CI
-on:  [workflow_dispatch, pull_request, push]
+
+on: [workflow_dispatch, pull_request, push]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    steps: [uses: answerdotai/workflows/nbdev3-ci@master]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install \
+            dabest \
+            pandas numpy matplotlib seaborn scipy \
+            Pillow svgutils lxml \
+            nbconvert ipykernel
+
+      - name: Execute figure1.ipynb
+        run: |
+          cd nbs
+          jupyter nbconvert \
+            --to notebook \
+            --execute figure1.ipynb \
+            --output /tmp/figure1_executed.ipynb \
+            --ExecutePreprocessor.timeout=1800
