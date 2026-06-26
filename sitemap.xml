@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sangyu.github.io/whorlmap-paper/10-whorlmap.html</loc>
-    <lastmod>2026-06-24T09:26:19.743Z</lastmod>
-  </url>
-  <url>
     <loc>https://sangyu.github.io/whorlmap-paper/index.html</loc>
-    <lastmod>2026-06-24T09:26:19.791Z</lastmod>
+    <lastmod>2026-06-26T06:26:05.620Z</lastmod>
   </url>
   <url>
-    <loc>https://sangyu.github.io/whorlmap-paper/core.html</loc>
-    <lastmod>2026-06-24T09:26:19.734Z</lastmod>
+    <loc>https://sangyu.github.io/whorlmap-paper/nbs/helpers/survey.html</loc>
+    <lastmod>2026-06-26T06:26:05.625Z</lastmod>
   </url>
   <url>
-    <loc>https://sangyu.github.io/whorlmap-paper/algorithm_panels.html</loc>
-    <lastmod>2026-06-24T09:26:19.797Z</lastmod>
+    <loc>https://sangyu.github.io/whorlmap-paper/nbs/figure1.html</loc>
+    <lastmod>2026-06-26T06:26:05.620Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sangyu.github.io/whorlmap-paper/nbs/helpers/make_cache.html</loc>
+    <lastmod>2026-06-26T06:26:05.624Z</lastmod>
   </url>
 </urlset>
