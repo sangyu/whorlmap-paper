@@ -5,7 +5,6 @@ website:
   title: "Whorlmap"
   site-url: "https://sangyu.github.io/whorlmap-paper"
   description: "Analysis and figures for the whorlmap paper"
-  version: "2026.06"
   navbar:
     left:
       - href: index.qmd
@@ -25,4 +24,4 @@ format:
     code-tools: true
 
 execute:
-  enabled: false   # render stored cell outputs only; re-run notebooks locally
+  eval: false      # render stored cell outputs only; re-run notebooks locally
