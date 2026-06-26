@@ -19,12 +19,15 @@ jobs:
           python-version: '3.11'
 
       - name: Install Python dependencies
-        run: pip install jupyter nbconvert
+        run: pip install jupyter nbconvert ipykernel
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
-      - uses: quarto-dev/quarto-actions/publish@v2
+      - name: Render site
+        run: quarto render
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
