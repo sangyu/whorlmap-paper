@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Spiral Encoding Variants – Whorlmap</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bba5ebae505b5c03f3f0d8040a416a6b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Whorlmap</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../nbs/figure1.html"> 
+<span class="menu-text">Figure 1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../nbs/helpers/survey.html"> 
+<span class="menu-text">Data Pipeline</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../nbs/helpers/make_cache.html"> 
+<span class="menu-text">Cache Builder</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../nbs/alternatives/spiral_variants.html" aria-current="page"> 
+<span class="menu-text">Alternatives</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#spiral-encoding-variants" id="toc-spiral-encoding-variants" class="nav-link active" data-scroll-target="#spiral-encoding-variants">Spiral Encoding Variants</a>
+  <ul class="collapse">
+  <li><a href="#spiral-path-generators" id="toc-spiral-path-generators" class="nav-link" data-scroll-target="#spiral-path-generators">Spiral path generators</a></li>
+  <li><a href="#cell-rendering-three-variants" id="toc-cell-rendering-three-variants" class="nav-link" data-scroll-target="#cell-rendering-three-variants">Cell rendering — three variants</a></li>
+  <li><a href="#synthesise-bootstrap-distributions-from-survey.csv" id="toc-synthesise-bootstrap-distributions-from-survey.csv" class="nav-link" data-scroll-target="#synthesise-bootstrap-distributions-from-survey.csv">Synthesise bootstrap distributions from survey.csv</a></li>
+  <li><a href="#algorithm-explanation-mapping-the-bootstrap-distribution-to-the-cell" id="toc-algorithm-explanation-mapping-the-bootstrap-distribution-to-the-cell" class="nav-link" data-scroll-target="#algorithm-explanation-mapping-the-bootstrap-distribution-to-the-cell">Algorithm explanation — mapping the bootstrap distribution to the cell</a></li>
+  <li><a href="#highlighted-cells-at-10-zoom" id="toc-highlighted-cells-at-10-zoom" class="nav-link" data-scroll-target="#highlighted-cells-at-10-zoom">Highlighted cells at 10× zoom</a></li>
+  <li><a href="#full-1320-whorlmap-all-three-variants" id="toc-full-1320-whorlmap-all-three-variants" class="nav-link" data-scroll-target="#full-1320-whorlmap-all-three-variants">Full 13×20 whorlmap — all three variants</a></li>
+  <li><a href="#observations" id="toc-observations" class="nav-link" data-scroll-target="#observations">Observations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Spiral Encoding Variants</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="spiral-encoding-variants" class="level1">
+<h1>Spiral Encoding Variants</h1>
+<p>Comparing three alternatives for how the outside-in spiral of a 7×7 whorl cell assigns quantile rank to pixel position. All three use the <strong>same GTEx data</strong> (approximate bootstrap distributions from <code>survey.csv</code>), the same colormap, and the same 13×20 grid layout as Figure 1. Only the spiral fill logic changes.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variant</th>
+<th>Spiral direction</th>
+<th>Assignment</th>
+<th>Center pixel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>V1 — baseline</strong></td>
+<td>outside → center</td>
+<td>sequential quantile rank</td>
+<td>max quantile</td>
+</tr>
+<tr class="even">
+<td><strong>V2 — median-center</strong></td>
+<td>center → outside</td>
+<td>symmetric interleaved rank</td>
+<td>median</td>
+</tr>
+<tr class="odd">
+<td><strong>V3 — mean-center (Keim)</strong></td>
+<td>center → outside</td>
+<td>sorted by deviation from mean</td>
+<td>mean</td>
+</tr>
+</tbody>
+</table>
+<p>V3 is included to empirically verify the intermingling concern for cells that straddle zero.</p>
+<div id="77fc26da" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:46.997553Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:46.997097Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:47.470003Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:47.469722Z&quot;}}" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> patches</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> LinearSegmentedColormap, Normalize</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>CMAP <span class="op">=</span> LinearSegmentedColormap.from_list(<span class="st">'swo'</span>, [<span class="st">'steelblue'</span>, <span class="st">'white'</span>, <span class="st">'orangered'</span>], N<span class="op">=</span><span class="dv">256</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>NORM <span class="op">=</span> Normalize(vmin<span class="op">=-</span><span class="fl">1.5</span>, vmax<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> Path(<span class="st">'../gtex_data'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="spiral-path-generators" class="level2">
+<h2 class="anchored" data-anchor-id="spiral-path-generators">Spiral path generators</h2>
+<div id="994af8a0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:47.471932Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:47.471785Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:47.475337Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:47.475077Z&quot;}}" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spiral_outside_in(n<span class="op">=</span><span class="dv">7</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""(row, col) pairs in outside-in rectangular spiral order."""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    path, top, bottom, left, right <span class="op">=</span> [], <span class="dv">0</span>, n<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, n<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> top <span class="op">&lt;=</span> bottom <span class="kw">and</span> left <span class="op">&lt;=</span> right:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(left, right<span class="op">+</span><span class="dv">1</span>):  path.append((top, c))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        top <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(top, bottom<span class="op">+</span><span class="dv">1</span>):  path.append((r, right))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        right <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> top <span class="op">&lt;=</span> bottom:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(right, left<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>): path.append((bottom, c))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            bottom <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> left <span class="op">&lt;=</span> right:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(bottom, top<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>): path.append((r, left))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            left <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> path</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spiral_inside_out(n<span class="op">=</span><span class="dv">7</span>):</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">list</span>(<span class="bu">reversed</span>(spiral_outside_in(n)))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>PATH_OUT_IN  <span class="op">=</span> spiral_outside_in(<span class="dv">7</span>)  <span class="co"># V1</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>PATH_IN_OUT  <span class="op">=</span> spiral_inside_out(<span class="dv">7</span>)  <span class="co"># V2, V3</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>N_PIX <span class="op">=</span> <span class="dv">49</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Spiral path lengths:'</span>, <span class="bu">len</span>(PATH_OUT_IN), <span class="bu">len</span>(PATH_IN_OUT))</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Center pixel (V1, last):'</span>, PATH_OUT_IN[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Center pixel (V2/V3, first):'</span>, PATH_IN_OUT[<span class="dv">0</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Spiral path lengths: 49 49
+Center pixel (V1, last): (3, 3)
+Center pixel (V2/V3, first): (3, 3)</code></pre>
+</div>
+</div>
+</section>
+<section id="cell-rendering-three-variants" class="level2">
+<h2 class="anchored" data-anchor-id="cell-rendering-three-variants">Cell rendering — three variants</h2>
+<div id="6a71c024" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:47.476855Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:47.476742Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:47.480613Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:47.480354Z&quot;}}" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_v1(samples, n<span class="op">=</span><span class="dv">7</span>):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""V1 — outside-in, sequential quantile rank (baseline)."""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, N_PIX)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> np.quantile(samples, q)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> np.zeros((n, n, <span class="dv">4</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (r, c) <span class="kw">in</span> <span class="bu">enumerate</span>(PATH_OUT_IN):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        img[r, c] <span class="op">=</span> CMAP(NORM(vals[i]))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_v2(samples, n<span class="op">=</span><span class="dv">7</span>):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""V2 — inside-out, symmetric interleaved rank (center = median)."""</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, N_PIX)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> np.quantile(samples, q)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Interleave: center gets median, then alternate lower/upper outward</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> N_PIX <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    interleaved <span class="op">=</span> []</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> mid, mid</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    interleaved.append(vals[mid])</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(mid):</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        lo <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span> interleaved.append(vals[lo])</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        hi <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span> interleaved.append(vals[hi])</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> np.zeros((n, n, <span class="dv">4</span>))</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (r, c) <span class="kw">in</span> <span class="bu">enumerate</span>(PATH_IN_OUT):</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        img[r, c] <span class="op">=</span> CMAP(NORM(interleaved[i]))</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_v3(samples, n<span class="op">=</span><span class="dv">7</span>):</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""V3 — inside-out, sorted by |deviation from mean| (Keim). Center = mean.</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">    Uses one representative sample per pixel (evenly spaced after sorting by</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">    unsigned deviation) rather than averaging a bin — averaging cancels out</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">    the tails for straddling-zero cells and washes the outer ring to white.</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    mean <span class="op">=</span> np.mean(samples)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    order <span class="op">=</span> np.argsort(np.<span class="bu">abs</span>(samples <span class="op">-</span> mean))</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    sorted_samples <span class="op">=</span> samples[order]</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Pick one representative per pixel, evenly spaced</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="bu">len</span>(sorted_samples) <span class="op">-</span> <span class="dv">1</span>, N_PIX, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> sorted_samples[indices]</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> np.zeros((n, n, <span class="dv">4</span>))</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (r, c) <span class="kw">in</span> <span class="bu">enumerate</span>(PATH_IN_OUT):</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        img[r, c] <span class="op">=</span> CMAP(NORM(vals[i]))</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>RENDERERS <span class="op">=</span> {<span class="st">'V1 outside-in</span><span class="ch">\n</span><span class="st">(baseline)'</span>: render_v1,</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>             <span class="st">'V2 median-center</span><span class="ch">\n</span><span class="st">(reversed)'</span>: render_v2,</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>             <span class="st">'V3 mean-center</span><span class="ch">\n</span><span class="st">(Keim)'</span>: render_v3}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="synthesise-bootstrap-distributions-from-survey.csv" class="level2">
+<h2 class="anchored" data-anchor-id="synthesise-bootstrap-distributions-from-survey.csv">Synthesise bootstrap distributions from survey.csv</h2>
+<div id="30f4d86c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:47.482046Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:47.481968Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:47.503244Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:47.502978Z&quot;}}" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>RIGHT_GENES <span class="op">=</span> [</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TPH2'</span>, <span class="st">'CHRNA7'</span>, <span class="st">'ESR1'</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TH'</span>, <span class="st">'SLC6A3'</span>, <span class="st">'DDC'</span>, <span class="st">'AGRP'</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SST'</span>, <span class="st">'PENK'</span>, <span class="st">'GAD1'</span>, <span class="st">'GAD2'</span>, <span class="st">'CRH'</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DRD5'</span>, <span class="st">'CHRM1'</span>, <span class="st">'BDNF'</span>, <span class="st">'CYP19A1'</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AIF1'</span>, <span class="st">'MAOA'</span>, <span class="st">'FKBP5'</span>, <span class="st">'GFAP'</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>REGION_ORDER <span class="op">=</span> [</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Hypothalamus'</span>, <span class="st">'Amygdala'</span>, <span class="st">'Hippocampus'</span>, <span class="st">'Ant. Cing. Ctx'</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Frontal Cortex'</span>, <span class="st">'Cortex'</span>, <span class="st">'Caudate'</span>, <span class="st">'Putamen'</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Nucleus Accumbens'</span>, <span class="st">'Cerebellum'</span>, <span class="st">'Cerebellar Hemi.'</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Substantia Nigra'</span>, <span class="st">'Spinal Cord'</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> pd.read_csv(DATA_DIR <span class="op">/</span> <span class="st">'survey.csv'</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey[survey.gene.isin(RIGHT_GENES) <span class="op">&amp;</span> survey.region.isin(REGION_ORDER)]</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Synthesise 5000-sample bootstrap from mean + CI</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> synth_bootstrap(row, n<span class="op">=</span><span class="dv">5000</span>):</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    se <span class="op">=</span> (row.ci_hi <span class="op">-</span> row.ci_lo) <span class="op">/</span> <span class="fl">3.92</span>  <span class="co"># 95% CI → SE</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rng.normal(row.mean_md, <span class="bu">max</span>(se, <span class="fl">1e-4</span>), n)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>bootstraps <span class="op">=</span> {}</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> survey.iterrows():</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    bootstraps[(row.gene, row.region)] <span class="op">=</span> synth_bootstrap(row)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Synthesised </span><span class="sc">{</span><span class="bu">len</span>(bootstraps)<span class="sc">}</span><span class="ss"> bootstrap distributions'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Synthesised 260 bootstrap distributions</code></pre>
+</div>
+</div>
+</section>
+<section id="algorithm-explanation-mapping-the-bootstrap-distribution-to-the-cell" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-explanation-mapping-the-bootstrap-distribution-to-the-cell">Algorithm explanation — mapping the bootstrap distribution to the cell</h2>
+<p>Each panel below shows <strong>the same synthetic bootstrap distribution</strong> (positive mean effect, moderate spread) encoded by each variant.</p>
+<p><strong>Top row</strong> — the 7×7 cell grid coloured by ring membership (outer → inner = light → dark), with the spiral traversal path overlaid as an arrow sequence.</p>
+<p><strong>Bottom row</strong> — stacked histogram of the bootstrap samples, bars coloured by which ring each quantile range maps to. Read top-to-bottom as outer→center.</p>
+<div id="b63a18b4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:51.992855Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:51.992748Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:52.620331Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:52.620015Z&quot;}}" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Bootstrap: SST / Spinal Cord (same as a1 in zoom figure) ────────────────</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bs_sorted <span class="op">=</span> np.sort(bootstraps[(<span class="st">'SST'</span>, <span class="st">'Spinal Cord'</span>)])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>_chop     <span class="op">=</span> <span class="bu">int</span>(np.ceil(<span class="bu">len</span>(bs_sorted) <span class="op">*</span> <span class="fl">0.025</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>bs_c      <span class="op">=</span> bs_sorted[_chop:<span class="op">-</span>_chop]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ── fv for each variant ───────────────────────────────────────────────────────</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_fv_v1(bs_c, N<span class="op">=</span>N_PIX):</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    ranks <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="bu">len</span>(bs_c), N, dtype<span class="op">=</span><span class="bu">int</span>)<span class="op">;</span> ranks[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    fv <span class="op">=</span> np.array([bs_c[r<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> r <span class="kw">in</span> ranks])</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">sum</span>(v <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">for</span> v <span class="kw">in</span> bs_c) <span class="op">&lt;</span> <span class="bu">len</span>(bs_c) <span class="op">/</span> <span class="dv">2</span>:</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        fv <span class="op">=</span> fv[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fv</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_fv_v2(bs_c, N<span class="op">=</span>N_PIX):</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    ranks <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="bu">len</span>(bs_c), N, dtype<span class="op">=</span><span class="bu">int</span>)<span class="op">;</span> ranks[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    all_q <span class="op">=</span> np.array([bs_c[r<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> r <span class="kw">in</span> ranks])</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    mid   <span class="op">=</span> N <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    interleaved <span class="op">=</span> [all_q[mid]]</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> mid, mid</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(mid):</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        lo <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span> interleaved.append(all_q[lo])</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        hi <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span> interleaved.append(all_q[hi])</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(interleaved)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_fv_v3(bs_c, N<span class="op">=</span>N_PIX):</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    mean      <span class="op">=</span> np.mean(bs_c)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    dev_order <span class="op">=</span> np.argsort(np.<span class="bu">abs</span>(bs_c <span class="op">-</span> mean))</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    sorted_s  <span class="op">=</span> bs_c[dev_order]</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    indices   <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="bu">len</span>(sorted_s)<span class="op">-</span><span class="dv">1</span>, N, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sorted_s[indices]</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>FV_LIST    <span class="op">=</span> [make_fv_v1(bs_c), make_fv_v2(bs_c), make_fv_v3(bs_c)]</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>PATHS_LIST <span class="op">=</span> [PATH_OUT_IN, PATH_IN_OUT, PATH_IN_OUT]</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>DNORM      <span class="op">=</span> NORM   <span class="co"># same colormap/norm as spiral_variants_zoom.png</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Helpers ───────────────────────────────────────────────────────────────────</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spiralize_grid(fv, path, n<span class="op">=</span><span class="dv">7</span>):</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    g <span class="op">=</span> np.full((n, n), np.nan)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (r, c) <span class="kw">in</span> <span class="bu">enumerate</span>(path):</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>        g[r, c] <span class="op">=</span> fv[i]</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> g</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_ring_arrows(ax, ring_k, sz, avg_val, clockwise<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""clockwise=True → V1 (outside-in); False → V2/V3 (inside-out)."""</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> ring_k <span class="op">+</span> sz <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    bg  <span class="op">=</span> CMAP(DNORM(avg_val))</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> <span class="st">"w"</span> <span class="cf">if</span> (<span class="fl">0.299</span><span class="op">*</span>bg[<span class="dv">0</span>]<span class="op">+</span><span class="fl">0.587</span><span class="op">*</span>bg[<span class="dv">1</span>]<span class="op">+</span><span class="fl">0.114</span><span class="op">*</span>bg[<span class="dv">2</span>]) <span class="op">&lt;</span> <span class="fl">0.52</span> <span class="cf">else</span> <span class="st">"k"</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    ap  <span class="op">=</span> <span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>, color<span class="op">=</span>col, lw<span class="op">=</span><span class="fl">1.0</span>, mutation_scale<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    d, e <span class="op">=</span> <span class="fl">0.25</span>, <span class="fl">0.6</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> clockwise:</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(mid<span class="op">+</span>e, ring_k<span class="op">-</span>d),        xytext<span class="op">=</span>(mid<span class="op">-</span>e, ring_k<span class="op">-</span>d),        arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d, mid<span class="op">+</span>e),   xytext<span class="op">=</span>(ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d, mid<span class="op">-</span>e),   arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(mid<span class="op">-</span>e, ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d),   xytext<span class="op">=</span>(mid<span class="op">+</span>e, ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d),   arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(ring_k<span class="op">-</span>d, mid<span class="op">-</span>e),         xytext<span class="op">=</span>(ring_k<span class="op">-</span>d, mid<span class="op">+</span>e),         arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(mid<span class="op">-</span>e, ring_k<span class="op">-</span>d),        xytext<span class="op">=</span>(mid<span class="op">+</span>e, ring_k<span class="op">-</span>d),        arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d, mid<span class="op">-</span>e),   xytext<span class="op">=</span>(ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d, mid<span class="op">+</span>e),   arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(mid<span class="op">+</span>e, ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d),   xytext<span class="op">=</span>(mid<span class="op">-</span>e, ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d),   arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(ring_k<span class="op">-</span>d, mid<span class="op">+</span>e),         xytext<span class="op">=</span>(ring_k<span class="op">-</span>d, mid<span class="op">-</span>e),         arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_algo_cell(ax, fv, path, title, clockwise<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>    n    <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>    fv_s <span class="op">=</span> np.sort(fv)</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>    grid <span class="op">=</span> spiralize_grid(fv, path, n)</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>    ax.imshow(grid, cmap<span class="op">=</span>CMAP, norm<span class="op">=</span>DNORM, origin<span class="op">=</span><span class="st">"upper"</span>,</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>              interpolation<span class="op">=</span><span class="st">"nearest"</span>, aspect<span class="op">=</span><span class="st">"equal"</span>)</span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># value rank of each pixel (q0 = smallest value, q48 = largest)</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>    val_rank <span class="op">=</span> np.argsort(np.argsort(fv))</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ring arrows</span></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n <span class="op">//</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>        sz <span class="op">=</span> n <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>k</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> sz <span class="op">&lt;=</span> <span class="dv">0</span>: <span class="cf">break</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>        end <span class="op">=</span> start <span class="op">+</span> (<span class="dv">4</span><span class="op">*</span>(sz<span class="op">-</span><span class="dv">1</span>) <span class="cf">if</span> sz <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">1</span>)</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> sz <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>            avg <span class="op">=</span> <span class="bu">float</span>(np.mean(fv_s[start:<span class="bu">min</span>(end, <span class="bu">len</span>(fv_s))]))</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>            draw_ring_arrows(ax, k, sz, avg, clockwise<span class="op">=</span>clockwise)</span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>        start <span class="op">=</span> end</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>    <span class="co"># labels: q{value_rank} at each pixel</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, (r, c) <span class="kw">in</span> <span class="bu">enumerate</span>(path):</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>        vr  <span class="op">=</span> val_rank[k]</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>        val <span class="op">=</span> <span class="bu">float</span>(fv[k])</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>        bg  <span class="op">=</span> CMAP(DNORM(val))</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>        lum <span class="op">=</span> <span class="fl">0.299</span><span class="op">*</span>bg[<span class="dv">0</span>]<span class="op">+</span><span class="fl">0.587</span><span class="op">*</span>bg[<span class="dv">1</span>]<span class="op">+</span><span class="fl">0.114</span><span class="op">*</span>bg[<span class="dv">2</span>]</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>        tc  <span class="op">=</span> <span class="st">"w"</span> <span class="cf">if</span> lum <span class="op">&lt;</span> <span class="fl">0.52</span> <span class="cf">else</span> <span class="st">"k"</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>        ax.text(c, r, <span class="ss">f"q</span><span class="sc">{</span>vr<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>val<span class="sc">:.1f}</span><span class="ss">"</span>,</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>                ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"center"</span>, fontsize<span class="op">=</span><span class="fl">4.5</span>, color<span class="op">=</span>tc,</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>                zorder<span class="op">=</span><span class="dv">10</span>, linespacing<span class="op">=</span><span class="fl">1.1</span>, multialignment<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="fl">0.5</span>, n<span class="op">-</span><span class="fl">0.5</span>)<span class="op">;</span> ax.set_ylim(n<span class="op">-</span><span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.5</span>)</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title, fontsize<span class="op">=</span><span class="fl">8.5</span>, pad<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_shared_hist(ax, bs_c, fv):</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Single histogram shared by all variants.</span></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="co">    q-labels are value rank: q0 = leftmost (smallest), q48 = rightmost (largest)."""</span></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>    N    <span class="op">=</span> <span class="bu">len</span>(fv)</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>    fv_s <span class="op">=</span> np.sort(fv)</span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>    span <span class="op">=</span> fv_s[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> fv_s[<span class="dv">0</span>]</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>    xl0  <span class="op">=</span> fv_s[<span class="dv">0</span>]  <span class="op">-</span> span<span class="op">*</span><span class="fl">0.05</span></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>    xl1  <span class="op">=</span> fv_s[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> span<span class="op">*</span><span class="fl">0.05</span></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>    BW   <span class="op">=</span> (xl1 <span class="op">-</span> xl0) <span class="op">/</span> <span class="dv">36</span></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>    bins <span class="op">=</span> np.arange(xl0, xl1<span class="op">+</span>BW, BW)</span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>    counts, _ <span class="op">=</span> np.histogram(np.clip(bs_c, xl0, xl1), bins<span class="op">=</span>bins, density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># segment boundaries = midpoints between consecutive sorted fv values</span></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>    seg_bounds    <span class="op">=</span> np.empty(N<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>    seg_bounds[<span class="dv">0</span>] <span class="op">=</span> xl0<span class="op">;</span> seg_bounds[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> xl1</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, N):</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>        seg_bounds[k] <span class="op">=</span> (fv_s[k<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>fv_s[k]) <span class="op">/</span> <span class="fl">2.0</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>    seg_cols <span class="op">=</span> [CMAP(DNORM(<span class="bu">float</span>(v))) <span class="cf">for</span> v <span class="kw">in</span> fv_s]</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>    best_piece <span class="op">=</span> {}</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lo, hi, ht <span class="kw">in</span> <span class="bu">zip</span>(bins[:<span class="op">-</span><span class="dv">1</span>], bins[<span class="dv">1</span>:], counts):</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> ht <span class="op">==</span> <span class="dv">0</span>: <span class="cf">continue</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>        y_bot <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>            ov <span class="op">=</span> <span class="bu">max</span>(<span class="fl">0.</span>, <span class="bu">min</span>(hi, seg_bounds[k<span class="op">+</span><span class="dv">1</span>]) <span class="op">-</span> <span class="bu">max</span>(lo, seg_bounds[k]))</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> ov <span class="op">&lt;=</span> <span class="dv">0</span>: <span class="cf">continue</span></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>            h <span class="op">=</span> ht <span class="op">*</span> ov <span class="op">/</span> (hi<span class="op">-</span>lo)</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>            ax.bar(lo, h, width<span class="op">=</span>hi<span class="op">-</span>lo, bottom<span class="op">=</span>y_bot, align<span class="op">=</span><span class="st">"edge"</span>,</span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>                   color<span class="op">=</span>seg_cols[k], edgecolor<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> k <span class="kw">not</span> <span class="kw">in</span> best_piece <span class="kw">or</span> h <span class="op">&gt;</span> best_piece[k][<span class="dv">2</span>]:</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>                best_piece[k] <span class="op">=</span> (lo<span class="op">+</span>(hi<span class="op">-</span>lo)<span class="op">/</span><span class="dv">2</span>, y_bot, h)</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>            y_bot <span class="op">+=</span> h</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>    <span class="co"># q-labels by value rank (q0 = leftmost bar)</span></span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, (xc, yb, h) <span class="kw">in</span> best_piece.items():</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> h <span class="op">&lt;</span> counts.<span class="bu">max</span>()<span class="op">*</span><span class="fl">0.005</span>: <span class="cf">continue</span></span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>        col <span class="op">=</span> seg_cols[k]<span class="op">;</span> lum <span class="op">=</span> <span class="fl">0.299</span><span class="op">*</span>col[<span class="dv">0</span>]<span class="op">+</span><span class="fl">0.587</span><span class="op">*</span>col[<span class="dv">1</span>]<span class="op">+</span><span class="fl">0.114</span><span class="op">*</span>col[<span class="dv">2</span>]</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>        tc  <span class="op">=</span> <span class="st">"w"</span> <span class="cf">if</span> lum <span class="op">&lt;</span> <span class="fl">0.52</span> <span class="cf">else</span> <span class="st">"k"</span></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>        ax.text(xc, yb<span class="op">+</span>h<span class="op">/</span><span class="dv">2</span>, <span class="ss">f"q</span><span class="sc">{</span>k<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>fv_s[k]<span class="sc">:.1f}</span><span class="ss">"</span>,</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>                ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"center"</span>, fontsize<span class="op">=</span><span class="fl">3.5</span>, color<span class="op">=</span>tc,</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>                zorder<span class="op">=</span><span class="dv">11</span>, linespacing<span class="op">=</span><span class="fl">1.0</span>, multialignment<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(fv_s[<span class="dv">0</span>]<span class="op">-</span>span<span class="op">*</span><span class="fl">0.06</span>, fv_s[<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>span<span class="op">*</span><span class="fl">0.06</span>)</span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="dv">0</span>, counts.<span class="bu">max</span>()<span class="op">*</span><span class="fl">1.08</span>)</span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sp <span class="kw">in</span> [<span class="st">"left"</span>,<span class="st">"right"</span>,<span class="st">"top"</span>]: ax.spines[sp].set_visible(<span class="va">False</span>)</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks([])<span class="op">;</span> ax.tick_params(labelsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Bootstrap mean difference (SST / Spinal Cord)"</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"Bootstrap distribution segmented by quantile rank</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"(q0 = smallest value, q48 = largest; bar colours match pixel colours below)"</span>,</span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>                 fontsize<span class="op">=</span><span class="fl">8.5</span>)</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Figure: histogram on top, three cells below ───────────────────────────────</span></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.gridspec <span class="im">import</span> GridSpec</span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="dv">8</span>))</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a>gs  <span class="op">=</span> GridSpec(<span class="dv">2</span>, <span class="dv">3</span>, figure<span class="op">=</span>fig,</span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>               height_ratios<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">1.6</span>],</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>               hspace<span class="op">=</span><span class="fl">0.38</span>, wspace<span class="op">=</span><span class="fl">0.12</span>)</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>ax_hist <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, :])   <span class="co"># full-width top row</span></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>draw_shared_hist(ax_hist, bs_c, FV_LIST[<span class="dv">0</span>])   <span class="co"># V1 fv = cleanest q ordering</span></span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a>TITLES_CELL <span class="op">=</span> [</span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>    <span class="st">"V1 — outside-in</span><span class="ch">\n</span><span class="st">(q0 = outer ring, q48 = centre)"</span>,</span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>    <span class="st">"V2 — inside-out symmetric</span><span class="ch">\n</span><span class="st">(q24 = centre, q0/q48 = outer ring)"</span>,</span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>    <span class="st">"V3 — inside-out deviation</span><span class="ch">\n</span><span class="st">(q~24 = centre, q0/q48 = outer ring)"</span>,</span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>CLOCKWISE <span class="op">=</span> [<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>]</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col, (fv, path, tc, cw) <span class="kw">in</span> <span class="bu">enumerate</span>(</span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>        <span class="bu">zip</span>(FV_LIST, PATHS_LIST, TITLES_CELL, CLOCKWISE)):</span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, col])</span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>    draw_algo_cell(ax, fv, path, tc, clockwise<span class="op">=</span>cw)</span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"algorithm_explanation.png"</span>, dpi<span class="op">=</span><span class="dv">200</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Saved algorithm_explanation.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="spiral_variants_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="spiral_variants_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved algorithm_explanation.png</code></pre>
+</div>
+</div>
+<p><strong>Figure legend — Spiral encoding variants</strong></p>
+<p><em>Top row — Cell ring maps.</em> Each 7×7 pixel grid represents one whorl cell. Pixels are shaded from light (outermost ring, 24 pixels) to dark (centre, 1 pixel). White arrows trace the spiral traversal path; the circle marks the first pixel visited and the star marks the last (and therefore the most recently assigned quantile value).</p>
+<p><em>Bottom row — Bootstrap distribution by ring.</em> Bars show the same synthetic bootstrap distribution (positive mean effect, moderate spread; mean ≈ 0.65, SD ≈ 0.28, n = 5 000 resamples), with each bar coloured by the ring that receives those samples under each variant. The dashed vertical line marks zero effect.</p>
+<p><strong>V1 — Outside-in baseline.</strong> The spiral visits pixels from the outermost ring inward. Quantile ranks are assigned sequentially (rank 0 → first outer pixel, rank 48 → centre pixel), so the lowest-effect samples (left tail of the distribution) populate the outer ring and the highest-effect samples concentrate at the centre. For a purely positive effect the centre is the most saturated red pixel; for a purely negative effect it is the most saturated blue. This is the encoding used in the current whorlmap implementation.</p>
+<p><strong>V2 — Inside-out symmetric (centre = median).</strong> The spiral path is reversed (visits centre first) and quantile ranks are interleaved symmetrically: the median (rank 24) is assigned to the centre pixel, then ranks 23 and 25 to the next ring, 22 and 26 to the ring after, and so on. Both distributional tails therefore appear in the outer ring, while the centre encodes the median — the conventional point estimate. Scanning the centre pixel of each cell across the full grid gives a scalar-heatmap-like read of median effects without losing distributional information in the surrounding rings.</p>
+<p><strong>V3 — Inside-out deviation from mean (Keim 2000).</strong> Following the query-dependent pixel arrangement formalised by Keim (2000, Definition 2), samples are sorted by their unsigned deviation from the bootstrap mean. The sample nearest the mean maps to the centre pixel; samples furthest from the mean map to the outer ring. Because the sort is unsigned, samples from the positive tail and the negative tail both end up in the outer ring, creating colour intermingling (adjacent red and blue pixels) for any cell whose distribution straddles zero. For strongly unidirectional effects the intermingling is absent and the outer ring is saturated in one colour, but for near-null or bimodal cells the outer ring becomes a red–blue mosaic that is hard to interpret. V3 is included here as the theoretically-motivated alternative but is not recommended for this application.</p>
+</section>
+<section id="highlighted-cells-at-10-zoom" class="level2">
+<h2 class="anchored" data-anchor-id="highlighted-cells-at-10-zoom">Highlighted cells at 10× zoom</h2>
+<p>The four cells from Figure 1 (a1, a2, b1, b2) shown at 10× magnification to make the pixel-level structure legible.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Label</th>
+<th>Gene</th>
+<th>Region</th>
+<th>Expected character</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a1</td>
+<td>SST</td>
+<td>Spinal Cord</td>
+<td>strong directional</td>
+</tr>
+<tr class="even">
+<td>a2</td>
+<td>FKBP5</td>
+<td>Putamen</td>
+<td>crosses zero</td>
+</tr>
+<tr class="odd">
+<td>b1</td>
+<td>AIF1</td>
+<td>Substantia Nigra</td>
+<td>strong directional</td>
+</tr>
+<tr class="even">
+<td>b2</td>
+<td>CYP19A1</td>
+<td>Caudate</td>
+<td>mixed / moderate</td>
+</tr>
+</tbody>
+</table>
+<div id="6ac7ef21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:51.462817Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:51.462709Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:51.991245Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:51.990918Z&quot;}}" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>HIGHLIGHT <span class="op">=</span> [</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'a1'</span>, <span class="st">'SST'</span>,     <span class="st">'Spinal Cord'</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'a2'</span>, <span class="st">'FKBP5'</span>,   <span class="st">'Putamen'</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'b1'</span>, <span class="st">'AIF1'</span>,    <span class="st">'Substantia Nigra'</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'b2'</span>, <span class="st">'CYP19A1'</span>, <span class="st">'Caudate'</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ZOOM_CELL <span class="op">=</span> <span class="dv">30</span>  <span class="co"># pixels per whorl pixel → each cell shown at 210×210 px</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="bu">len</span>(HIGHLIGHT), <span class="bu">len</span>(RENDERERS),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                          figsize<span class="op">=</span>(<span class="dv">4</span> <span class="op">*</span> <span class="bu">len</span>(RENDERERS), <span class="fl">4.5</span> <span class="op">*</span> <span class="bu">len</span>(HIGHLIGHT)))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row_i, (label, gene, region) <span class="kw">in</span> <span class="bu">enumerate</span>(HIGHLIGHT):</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> bootstraps[(gene, region)]</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col_j, (vname, renderer) <span class="kw">in</span> <span class="bu">enumerate</span>(RENDERERS.items()):</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> axes[row_i, col_j]</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        cell_img <span class="op">=</span> renderer(samples)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        cell_big <span class="op">=</span> np.repeat(np.repeat(cell_img, ZOOM_CELL, axis<span class="op">=</span><span class="dv">0</span>), ZOOM_CELL, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        ax.imshow(cell_big, interpolation<span class="op">=</span><span class="st">'nearest'</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        ax.set_xticks([])<span class="op">;</span> ax.set_yticks([])</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> row_i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>            ax.set_title(vname, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col_j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>            ax.set_ylabel(<span class="ss">f'</span><span class="sc">{</span>label<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>gene<span class="sc">}</span><span class="ss"> / </span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Highlighted cells — 30× zoom'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, y<span class="op">=</span><span class="fl">1.01</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_zoom.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Saved spiral_variants_zoom.png'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="spiral_variants_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="spiral_variants_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved spiral_variants_zoom.png</code></pre>
+</div>
+</div>
+</section>
+<section id="full-1320-whorlmap-all-three-variants" class="level2">
+<h2 class="anchored" data-anchor-id="full-1320-whorlmap-all-three-variants">Full 13×20 whorlmap — all three variants</h2>
+<p>The three maps below use identical data; only the fill logic differs. Look especially at cells that straddle zero (V3 intermingling) vs. cells with strong directional effects (V1 vs V2 gradient direction). <strong>Click on the pictures to see larger versions.</strong></p>
+<div id="bb1726b7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:47.504835Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:47.504747Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:49.470886Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:49.470500Z&quot;}}" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ZOOM <span class="op">=</span> <span class="dv">8</span>  <span class="co"># pixels per whorl-cell pixel → each cell = 56×56 px in the map</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_whorlmap(renderer, ax, title):</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    nrow, ncol <span class="op">=</span> <span class="bu">len</span>(REGION_ORDER), <span class="bu">len</span>(RIGHT_GENES)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    canvas <span class="op">=</span> np.ones((nrow <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM, ncol <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM, <span class="dv">4</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ri, region <span class="kw">in</span> <span class="bu">enumerate</span>(REGION_ORDER):</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ci, gene <span class="kw">in</span> <span class="bu">enumerate</span>(RIGHT_GENES):</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            key <span class="op">=</span> (gene, region)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> key <span class="kw">not</span> <span class="kw">in</span> bootstraps:</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>            cell_img <span class="op">=</span> renderer(bootstraps[key])  <span class="co"># 7×7×4</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Scale up by ZOOM</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>            cell_big <span class="op">=</span> np.repeat(np.repeat(cell_img, ZOOM, axis<span class="op">=</span><span class="dv">0</span>), ZOOM, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>            r0, c0 <span class="op">=</span> ri <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM, ci <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>            canvas[r0:r0 <span class="op">+</span> <span class="dv">7</span><span class="op">*</span>ZOOM, c0:c0 <span class="op">+</span> <span class="dv">7</span><span class="op">*</span>ZOOM] <span class="op">=</span> cell_big</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    ax.imshow(canvas, interpolation<span class="op">=</span><span class="st">'nearest'</span>, aspect<span class="op">=</span><span class="st">'equal'</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks(np.arange(ncol) <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> ZOOM)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    ax.set_xticklabels(RIGHT_GENES, rotation<span class="op">=</span><span class="dv">90</span>, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks(np.arange(nrow) <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> ZOOM)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    ax.set_yticklabels(REGION_ORDER, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title, fontsize<span class="op">=</span><span class="dv">10</span>, pad<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">22</span>, <span class="dv">9</span>))</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, (label, renderer) <span class="kw">in</span> <span class="bu">zip</span>(axes, RENDERERS.items()):</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    draw_whorlmap(renderer, ax, label)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(pad<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_fullmap.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Saved spiral_variants_fullmap.png'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="spiral_variants_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="spiral_variants_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved spiral_variants_fullmap.png</code></pre>
+</div>
+</div>
+<div id="9cdf1fc6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:49.472729Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:49.472605Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:51.460840Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:51.460561Z&quot;}}" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Additional figure: cell borders baked into canvas (pixel-perfect) ────────</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># V1 shown without borders to demonstrate that the outside-in spiral creates</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># natural implicit framing; all three shown WITH borders in this figure.</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>GRAY <span class="op">=</span> np.array([<span class="fl">0.55</span>, <span class="fl">0.55</span>, <span class="fl">0.55</span>, <span class="fl">1.0</span>])   <span class="co"># border colour</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_whorlmap_with_border(renderer, ax, title, add_border<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    nrow, ncol <span class="op">=</span> <span class="bu">len</span>(REGION_ORDER), <span class="bu">len</span>(RIGHT_GENES)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    canvas <span class="op">=</span> np.ones((nrow <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM, ncol <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM, <span class="dv">4</span>))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ri, region <span class="kw">in</span> <span class="bu">enumerate</span>(REGION_ORDER):</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ci, gene <span class="kw">in</span> <span class="bu">enumerate</span>(RIGHT_GENES):</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>            key <span class="op">=</span> (gene, region)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> key <span class="kw">not</span> <span class="kw">in</span> bootstraps:</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>            cell_img <span class="op">=</span> renderer(bootstraps[key])</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>            cell_big <span class="op">=</span> np.repeat(np.repeat(cell_img, ZOOM, axis<span class="op">=</span><span class="dv">0</span>), ZOOM, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>            r0, c0 <span class="op">=</span> ri <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM, ci <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>            canvas[r0:r0 <span class="op">+</span> <span class="dv">7</span><span class="op">*</span>ZOOM, c0:c0 <span class="op">+</span> <span class="dv">7</span><span class="op">*</span>ZOOM] <span class="op">=</span> cell_big</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> add_border:</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Paint 1-pixel gray lines at every cell boundary, directly in the canvas</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, nrow):</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>            canvas[i <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM <span class="op">-</span> <span class="dv">1</span>, :] <span class="op">=</span> GRAY   <span class="co"># last pixel row of cell i-1</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, ncol):</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>            canvas[:, j <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM <span class="op">-</span> <span class="dv">1</span>] <span class="op">=</span> GRAY   <span class="co"># last pixel col of cell j-1</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    ax.imshow(canvas, interpolation<span class="op">=</span><span class="st">'nearest'</span>, aspect<span class="op">=</span><span class="st">'equal'</span>)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks(np.arange(ncol) <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> ZOOM)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    ax.set_xticklabels(RIGHT_GENES, rotation<span class="op">=</span><span class="dv">90</span>, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks(np.arange(nrow) <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> ZOOM <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> ZOOM)</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    ax.set_yticklabels(REGION_ORDER, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title, fontsize<span class="op">=</span><span class="dv">10</span>, pad<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">22</span>, <span class="dv">9</span>))</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, (label, renderer) <span class="kw">in</span> <span class="bu">zip</span>(axes, RENDERERS.items()):</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    draw_whorlmap_with_border(renderer, ax, label, add_border<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(pad<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_borders.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Saved spiral_variants_borders.png'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="spiral_variants_files/figure-html/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="spiral_variants_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved spiral_variants_borders.png</code></pre>
+</div>
+</div>
+<p><strong>Cell borders.</strong> In V1 (outside-in spiral), the outermost ring of each cell acts as a natural frame: adjacent cells meet edge-to-edge at their dimmest, most peripheral pixels, creating an implicit boundary that the eye resolves without any overlay. In V2 and V3 (inside-out), the outermost ring instead carries the most deviated values — the same saturated colours that appear at the centre of strongly-affected cells. When two such cells are adjacent, their outer rings can share nearly identical hues and the cell boundary becomes ambiguous. V3 in particular follows the centre-dominant arrangement formalised in <span class="citation" data-cites="keim2000">(<a href="#ref-keim2000" role="doc-biblioref">Keim 2000</a>)</span>, which places the most query-relevant data at the centre; a consequence is that the outer ring aggregates the most extreme values from both tails, making implicit cell separation impossible. A thin 1-pixel gray separator (painted directly into the canvas, one pixel inside each cell boundary) restores legibility without affecting colour fidelity inside the cells.</p>
+</section>
+<section id="observations" class="level2">
+<h2 class="anchored" data-anchor-id="observations">Observations</h2>
+<p>Record visual observations here after running.</p>
+<ul>
+<li>V1 vs V2: does reversing the spiral change readability of the full map?</li>
+<li>V2: is the median visually salient at the center?</li>
+<li>V3: is intermingling visible in straddling-zero cells (a2)?</li>
+<li>Which variant best supports quick scanning of the full 13×20 grid?</li>
+</ul>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-keim2000" class="csl-entry" role="listitem">
+Keim, Daniel A. 2000. <span>“Designing Pixel-Oriented Visualization Techniques: Theory and Applications.”</span> <em>IEEE Transactions on Visualization and Computer Graphics</em> 6 (1): 59–78. <a href="https://doi.org/10.1109/2945.841121">https://doi.org/10.1109/2945.841121</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/sangyu\.github\.io\/whorlmap-paper");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
