@@ -15,6 +15,8 @@ website:
         text: Data Pipeline
       - href: nbs/helpers/make_cache.ipynb
         text: Cache Builder
+      - href: nbs/alternatives/spiral_variants.ipynb
+        text: Alternatives
 
 format:
   html:

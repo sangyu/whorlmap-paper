@@ -171,3 +171,5 @@ nbs/compare.svg
 
 /.quarto/
 **/*.quarto_ipynb
+
+/resources
