@@ -24,6 +24,9 @@ format:
     toc: true
     code-fold: true
     code-tools: true
+    lightbox: true
+    fig-responsive: true
+    css: custom.css
 
 execute:
   eval: false      # render stored cell outputs only; re-run notebooks locally
