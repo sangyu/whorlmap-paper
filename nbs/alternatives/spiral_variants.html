@@ -129,6 +129,7 @@ div.csl-indent {
 }</script>
 
 
+<link rel="stylesheet" href="../../custom.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -259,7 +260,7 @@ div.csl-indent {
 </tbody>
 </table>
 <p>V3 is included to empirically verify the intermingling concern for cells that straddle zero.</p>
-<div id="77fc26da" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:46.997553Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:46.997097Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:47.470003Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:47.469722Z&quot;}}" data-execution_count="1">
+<div id="77fc26da" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:25:57.394684Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:25:57.394428Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:25:57.913328Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:25:57.912997Z&quot;}}" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -279,7 +280,7 @@ div.csl-indent {
 </div>
 <section id="spiral-path-generators" class="level2">
 <h2 class="anchored" data-anchor-id="spiral-path-generators">Spiral path generators</h2>
-<div id="994af8a0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:47.471932Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:47.471785Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:47.475337Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:47.475077Z&quot;}}" data-execution_count="2">
+<div id="994af8a0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:25:57.915346Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:25:57.915172Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:25:57.919019Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:25:57.918725Z&quot;}}" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spiral_outside_in(n<span class="op">=</span><span class="dv">7</span>):</span>
@@ -318,7 +319,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 </section>
 <section id="cell-rendering-three-variants" class="level2">
 <h2 class="anchored" data-anchor-id="cell-rendering-three-variants">Cell rendering — three variants</h2>
-<div id="6a71c024" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:47.476855Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:47.476742Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:47.480613Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:47.480354Z&quot;}}" data-execution_count="3">
+<div id="6a71c024" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:25:57.921095Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:25:57.920980Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:25:57.926134Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:25:57.925718Z&quot;}}" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_v1(samples, n<span class="op">=</span><span class="dv">7</span>):</span>
@@ -373,7 +374,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 </section>
 <section id="synthesise-bootstrap-distributions-from-survey.csv" class="level2">
 <h2 class="anchored" data-anchor-id="synthesise-bootstrap-distributions-from-survey.csv">Synthesise bootstrap distributions from survey.csv</h2>
-<div id="30f4d86c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:47.482046Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:47.481968Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:47.503244Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:47.502978Z&quot;}}" data-execution_count="4">
+<div id="30f4d86c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:25:57.928011Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:25:57.927895Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:25:57.956717Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:25:57.956329Z&quot;}}" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>RIGHT_GENES <span class="op">=</span> [</span>
@@ -414,7 +415,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 <p>Each panel below shows <strong>the same synthetic bootstrap distribution</strong> (positive mean effect, moderate spread) encoded by each variant.</p>
 <p><strong>Top row</strong> — the 7×7 cell grid coloured by ring membership (outer → inner = light → dark), with the spiral traversal path overlaid as an arrow sequence.</p>
 <p><strong>Bottom row</strong> — stacked histogram of the bootstrap samples, bars coloured by which ring each quantile range maps to. Read top-to-bottom as outer→center.</p>
-<div id="b63a18b4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:51.992855Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:51.992748Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:52.620331Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:52.620015Z&quot;}}" data-execution_count="8">
+<div id="b63a18b4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:25:57.967081Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:25:57.966909Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:25:59.599824Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:25:59.599512Z&quot;}}" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Bootstrap: SST / Spinal Cord (same as a1 in zoom figure) ────────────────</span></span>
@@ -583,7 +584,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 <span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, col])</span>
 <span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>    draw_algo_cell(ax, fv, path, tc, clockwise<span class="op">=</span>cw)</span>
 <span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"algorithm_explanation.png"</span>, dpi<span class="op">=</span><span class="dv">200</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"algorithm_explanation.png"</span>, dpi<span class="op">=</span><span class="dv">600</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span>
 <span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Saved algorithm_explanation.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -644,7 +645,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 </tr>
 </tbody>
 </table>
-<div id="6ac7ef21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:51.462817Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:51.462709Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:51.991245Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:51.990918Z&quot;}}" data-execution_count="7">
+<div id="6ac7ef21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:25:59.601380Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:25:59.601293Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:26:03.753170Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:26:03.752836Z&quot;}}" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>HIGHLIGHT <span class="op">=</span> [</span>
@@ -673,7 +674,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Highlighted cells — 30× zoom'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, y<span class="op">=</span><span class="fl">1.01</span>)</span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_zoom.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_zoom.png'</span>, dpi<span class="op">=</span><span class="dv">600</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
 <span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Saved spiral_variants_zoom.png'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -692,7 +693,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 <section id="full-1320-whorlmap-all-three-variants" class="level2">
 <h2 class="anchored" data-anchor-id="full-1320-whorlmap-all-three-variants">Full 13×20 whorlmap — all three variants</h2>
 <p>The three maps below use identical data; only the fill logic differs. Look especially at cells that straddle zero (V3 intermingling) vs. cells with strong directional effects (V1 vs V2 gradient direction). <strong>Click on the pictures to see larger versions.</strong></p>
-<div id="bb1726b7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:47.504835Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:47.504747Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:49.470886Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:49.470500Z&quot;}}" data-execution_count="5">
+<div id="bb1726b7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:26:03.755106Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:26:03.754967Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:26:07.414324Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:26:07.414001Z&quot;}}" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ZOOM <span class="op">=</span> <span class="dv">8</span>  <span class="co"># pixels per whorl-cell pixel → each cell = 56×56 px in the map</span></span>
@@ -724,7 +725,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 <span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    draw_whorlmap(renderer, ax, label)</span>
 <span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(pad<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_fullmap.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_fullmap.png'</span>, dpi<span class="op">=</span><span class="dv">600</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
 <span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Saved spiral_variants_fullmap.png'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -739,7 +740,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 <pre><code>Saved spiral_variants_fullmap.png</code></pre>
 </div>
 </div>
-<div id="9cdf1fc6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:00:49.472729Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:00:49.472605Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:00:51.460840Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:00:51.460561Z&quot;}}" data-execution_count="6">
+<div id="9cdf1fc6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-29T08:26:07.416196Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-29T08:26:07.416066Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-29T08:26:10.998741Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-29T08:26:10.998363Z&quot;}}" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── Additional figure: cell borders baked into canvas (pixel-perfect) ────────</span></span>
@@ -781,7 +782,7 @@ Center pixel (V2/V3, first): (3, 3)</code></pre>
 <span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    draw_whorlmap_with_border(renderer, ax, label, add_border<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(pad<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_borders.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'spiral_variants_borders.png'</span>, dpi<span class="op">=</span><span class="dv">600</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
 <span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Saved spiral_variants_borders.png'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
