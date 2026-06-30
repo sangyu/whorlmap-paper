@@ -17,6 +17,10 @@ website:
         text: Cache Builder
       - href: nbs/alternatives/spiral_variants.ipynb
         text: Alternatives
+    right:
+      - icon: github
+        href: https://github.com/sangyu/whorlmap-paper
+        aria-label: GitHub
 
 format:
   html:
