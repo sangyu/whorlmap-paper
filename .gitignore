@@ -162,7 +162,9 @@ nbs/gtex_data/figure1_cache.pkl.gz
 nbs/gtex_survey*.log
 
 # Generated figure images (all rebuilt by nbs/figure1.ipynb — not source files)
-nbs/images/
+nbs/images/*
+!nbs/images/figure1_assembly.png
+!nbs/images/figure1_assembly.svg
 
 # Scratchpad files
 nbs/handoff.md
