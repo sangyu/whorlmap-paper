@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Whorlmap Demo – Whorlmap</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bba5ebae505b5c03f3f0d8040a416a6b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../custom.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Whorlmap</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../nbs/figure1.html"> 
+<span class="menu-text">Figure 1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../nbs/helpers/survey.html"> 
+<span class="menu-text">Data Pipeline</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../nbs/helpers/make_cache.html"> 
+<span class="menu-text">Cache Builder</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../nbs/alternatives/spiral_variants.html"> 
+<span class="menu-text">Alternatives</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sangyu/whorlmap-paper"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">1. Setup</a></li>
+  <li><a href="#panel-a-from-bootstrap-distribution-to-whorl-cellwe-start-with-a-simple-synthetic-two-group-comparison-n-20-per-group-to-show-the-encoding-step-by-step--ai-gardner-altman-plot-the-raw-data-and-the-floating-bootstrap-mean-difference-with-95-ci.--aii-whorl-cell-the-same-bootstrap-distribution-re-encoded-as-a-7x7-pixel-grid-filled-via-outside-in-spiral.-each-pixel-represents-one-quantile-rank-its-colour-is-the-effect-size-at-that-quantile.--aiii-stacked-histogram-the-bootstrap-distribution-segmented-by-the-same-quantile-boundaries-with-colours-matching-aii." id="toc-panel-a-from-bootstrap-distribution-to-whorl-cellwe-start-with-a-simple-synthetic-two-group-comparison-n-20-per-group-to-show-the-encoding-step-by-step--ai-gardner-altman-plot-the-raw-data-and-the-floating-bootstrap-mean-difference-with-95-ci.--aii-whorl-cell-the-same-bootstrap-distribution-re-encoded-as-a-7x7-pixel-grid-filled-via-outside-in-spiral.-each-pixel-represents-one-quantile-rank-its-colour-is-the-effect-size-at-that-quantile.--aiii-stacked-histogram-the-bootstrap-distribution-segmented-by-the-same-quantile-boundaries-with-colours-matching-aii." class="nav-link" data-scroll-target="#panel-a-from-bootstrap-distribution-to-whorl-cellwe-start-with-a-simple-synthetic-two-group-comparison-n-20-per-group-to-show-the-encoding-step-by-step--ai-gardner-altman-plot-the-raw-data-and-the-floating-bootstrap-mean-difference-with-95-ci.--aii-whorl-cell-the-same-bootstrap-distribution-re-encoded-as-a-7x7-pixel-grid-filled-via-outside-in-spiral.-each-pixel-represents-one-quantile-rank-its-colour-is-the-effect-size-at-that-quantile.--aiii-stacked-histogram-the-bootstrap-distribution-segmented-by-the-same-quantile-boundaries-with-colours-matching-aii.">2. Panel A — From Bootstrap Distribution to Whorl CellWe start with a simple synthetic two-group comparison (n = 20 per group) to show the encoding step-by-step:- <strong>Ai</strong> (Gardner-Altman plot): the raw data and the floating bootstrap mean difference with 95% CI.- <strong>Aii</strong> (whorl cell): the same bootstrap distribution, re-encoded as a 7x7 pixel grid filled via outside-in spiral. Each pixel represents one quantile rank; its colour is the effect size at that quantile.- <strong>Aiii</strong> (stacked histogram): the bootstrap distribution segmented by the same quantile boundaries, with colours matching Aii.</a>
+  <ul class="collapse">
+  <li><a href="#panel-ai-gardner-altman-estimation-plot" id="toc-panel-ai-gardner-altman-estimation-plot" class="nav-link" data-scroll-target="#panel-ai-gardner-altman-estimation-plot">2.1 Panel Ai — Gardner-Altman estimation plot</a></li>
+  <li><a href="#panels-aii-aiii-whorl-cell-segmented-histogramthe-bootstrap-distribution-5-000-resamples-2.5-tails-removed-is-ranked-and-assigned-to-the-72-49-pixels-via-outside-in-spiral-ordering.-the-outermost-ring-q0-q23-spans-the-most-extreme-values-the-innermost-pixel-q48-holds-the-median." id="toc-panels-aii-aiii-whorl-cell-segmented-histogramthe-bootstrap-distribution-5-000-resamples-2.5-tails-removed-is-ranked-and-assigned-to-the-72-49-pixels-via-outside-in-spiral-ordering.-the-outermost-ring-q0-q23-spans-the-most-extreme-values-the-innermost-pixel-q48-holds-the-median." class="nav-link" data-scroll-target="#panels-aii-aiii-whorl-cell-segmented-histogramthe-bootstrap-distribution-5-000-resamples-2.5-tails-removed-is-ranked-and-assigned-to-the-72-49-pixels-via-outside-in-spiral-ordering.-the-outermost-ring-q0-q23-spans-the-most-extreme-values-the-innermost-pixel-q48-holds-the-median.">2.2 Panels Aii &amp; Aiii — Whorl cell + segmented histogramThe bootstrap distribution (5 000 resamples, 2.5% tails removed) is ranked and assigned to the 7^2 = 49 pixels via outside-in spiral ordering. The outermost ring (q0-q23) spans the most extreme values; the innermost pixel (q48) holds the median.</a></li>
+  </ul></li>
+  <li><a href="#panel-b-bootstrap-distribution-taxonomyfive-stylised-distributions-show-how-different-statistical-patterns-map-onto-different-whorl-cell-appearances-panel-distribution-what-to-look-for----bi-large-positive-narrow-ci-solid-warm-orange-red-outer-ring-bii-large-negative-narrow-ci-solid-cool-blue-outer-ring-biii-near-zero-effect-pale-cell-small-n-no-signal-biv-broad-uncertain-mixed-warm-and-cool-in-outer-ring-bv-bimodal-discrete-n2-two-colour-checkerboard" id="toc-panel-b-bootstrap-distribution-taxonomyfive-stylised-distributions-show-how-different-statistical-patterns-map-onto-different-whorl-cell-appearances-panel-distribution-what-to-look-for----bi-large-positive-narrow-ci-solid-warm-orange-red-outer-ring-bii-large-negative-narrow-ci-solid-cool-blue-outer-ring-biii-near-zero-effect-pale-cell-small-n-no-signal-biv-broad-uncertain-mixed-warm-and-cool-in-outer-ring-bv-bimodal-discrete-n2-two-colour-checkerboard" class="nav-link" data-scroll-target="#panel-b-bootstrap-distribution-taxonomyfive-stylised-distributions-show-how-different-statistical-patterns-map-onto-different-whorl-cell-appearances-panel-distribution-what-to-look-for----bi-large-positive-narrow-ci-solid-warm-orange-red-outer-ring-bii-large-negative-narrow-ci-solid-cool-blue-outer-ring-biii-near-zero-effect-pale-cell-small-n-no-signal-biv-broad-uncertain-mixed-warm-and-cool-in-outer-ring-bv-bimodal-discrete-n2-two-colour-checkerboard">3. Panel B — Bootstrap Distribution TaxonomyFive stylised distributions show how different statistical patterns map onto different whorl cell appearances:| Panel | Distribution | What to look for ||——-|————-|——————|| Bi | Large positive, narrow CI | Solid warm (orange-red) outer ring || Bii | Large negative, narrow CI | Solid cool (blue) outer ring || Biii | Near-zero effect | Pale cell — small n, no signal || Biv | Broad / uncertain | Mixed warm and cool in outer ring || Bv | Bimodal (discrete, N=2) | Two-colour checkerboard |</a></li>
+  <li><a href="#panel-c-gtex-sex-differences-in-brain-gene-expressionthe-question-do-any-of-these-20-neuroactive-glial-genes-show-sex-differences-female---male-log2-tpm1-in-human-brain-and-if-so-wherethe-data-gtex-v8-13-brain-regions-male-n-100-200-female-n-50-100-per-region.-effect-size-bootstrap-mean-difference-5-000-resamples.the-highlighted-pairs-reveal-something-a-scalar-heatmap-hides--pair-a-blue-sstspinal-cord-a1-and-fkbp5putamen-a2-have-similar-scalar-means-but-their-bootstrap-distributions-differ-dramatically-in-width.--pair-b-maroon-aif1substantia-nigra-b1-and-cyp19a1caudate-b2-have-similar-means-but-different-distributional-shapes." id="toc-panel-c-gtex-sex-differences-in-brain-gene-expressionthe-question-do-any-of-these-20-neuroactive-glial-genes-show-sex-differences-female---male-log2-tpm1-in-human-brain-and-if-so-wherethe-data-gtex-v8-13-brain-regions-male-n-100-200-female-n-50-100-per-region.-effect-size-bootstrap-mean-difference-5-000-resamples.the-highlighted-pairs-reveal-something-a-scalar-heatmap-hides--pair-a-blue-sstspinal-cord-a1-and-fkbp5putamen-a2-have-similar-scalar-means-but-their-bootstrap-distributions-differ-dramatically-in-width.--pair-b-maroon-aif1substantia-nigra-b1-and-cyp19a1caudate-b2-have-similar-means-but-different-distributional-shapes." class="nav-link" data-scroll-target="#panel-c-gtex-sex-differences-in-brain-gene-expressionthe-question-do-any-of-these-20-neuroactive-glial-genes-show-sex-differences-female---male-log2-tpm1-in-human-brain-and-if-so-wherethe-data-gtex-v8-13-brain-regions-male-n-100-200-female-n-50-100-per-region.-effect-size-bootstrap-mean-difference-5-000-resamples.the-highlighted-pairs-reveal-something-a-scalar-heatmap-hides--pair-a-blue-sstspinal-cord-a1-and-fkbp5putamen-a2-have-similar-scalar-means-but-their-bootstrap-distributions-differ-dramatically-in-width.--pair-b-maroon-aif1substantia-nigra-b1-and-cyp19a1caudate-b2-have-similar-means-but-different-distributional-shapes.">4. Panel C — GTEx Sex Differences in Brain Gene Expression<strong>The question:</strong> Do any of these 20 neuroactive / glial genes show sex differences (Female - Male, log2 TPM+1) in human brain, and if so, where?<strong>The data:</strong> GTEx v8; 13 brain regions; male n ~ 100-200, female n ~ 50-100 per region. Effect size = bootstrap mean difference (5 000 resamples).<strong>The highlighted pairs</strong> reveal something a scalar heatmap hides:- <strong>Pair A</strong> (blue): <em>SST</em>/Spinal Cord (a1) and <em>FKBP5</em>/Putamen (a2) have similar scalar means, but their bootstrap distributions differ dramatically in width.- <strong>Pair B</strong> (maroon): <em>AIF1</em>/Substantia Nigra (b1) and <em>CYP19A1</em>/Caudate (b2) have similar means, but different distributional shapes.</a>
+  <ul class="collapse">
+  <li><a href="#panel-ci-whorlmap-with-bootstrap-sparklineseach-cell-is-a-7x7-whorl-cell.-the-four-highlighted-cells-are-connected-to-their-full-bootstrap-distributions-on-the-right.-within-each-pair-a-or-b-the-x-axis-is-shared-so-width-differences-are-directly-visible." id="toc-panel-ci-whorlmap-with-bootstrap-sparklineseach-cell-is-a-7x7-whorl-cell.-the-four-highlighted-cells-are-connected-to-their-full-bootstrap-distributions-on-the-right.-within-each-pair-a-or-b-the-x-axis-is-shared-so-width-differences-are-directly-visible." class="nav-link" data-scroll-target="#panel-ci-whorlmap-with-bootstrap-sparklineseach-cell-is-a-7x7-whorl-cell.-the-four-highlighted-cells-are-connected-to-their-full-bootstrap-distributions-on-the-right.-within-each-pair-a-or-b-the-x-axis-is-shared-so-width-differences-are-directly-visible.">4.1 Panel Ci — Whorlmap with bootstrap sparklinesEach cell is a 7x7 whorl cell. The four highlighted cells are connected to their full bootstrap distributions on the right. Within each pair (A or B), the x-axis is shared so width differences are directly visible.</a></li>
+  <li><a href="#panel-cii-scalar-heatmapthe-same-data-as-ci-but-each-cell-shows-only-the-point-estimate-of-the-mean-difference.-the-highlighted-pairs-same-a1a2b1b2-labels-have-nearly-identical-scalar-values-the-distributional-differences-visible-in-ci-are-invisible-here." id="toc-panel-cii-scalar-heatmapthe-same-data-as-ci-but-each-cell-shows-only-the-point-estimate-of-the-mean-difference.-the-highlighted-pairs-same-a1a2b1b2-labels-have-nearly-identical-scalar-values-the-distributional-differences-visible-in-ci-are-invisible-here." class="nav-link" data-scroll-target="#panel-cii-scalar-heatmapthe-same-data-as-ci-but-each-cell-shows-only-the-point-estimate-of-the-mean-difference.-the-highlighted-pairs-same-a1a2b1b2-labels-have-nearly-identical-scalar-values-the-distributional-differences-visible-in-ci-are-invisible-here.">4.2 Panel Cii — Scalar heatmapThe same data as Ci, but each cell shows only the point estimate of the mean difference. The highlighted pairs (same a1/a2/b1/b2 labels) have nearly identical scalar values — the distributional differences visible in Ci are invisible here.</a></li>
+  </ul></li>
+  <li><a href="#assembly-figure-1stitch-all-saved-panel-pngs-into-a-single-600-dpi-figure-using-pil." id="toc-assembly-figure-1stitch-all-saved-panel-pngs-into-a-single-600-dpi-figure-using-pil." class="nav-link" data-scroll-target="#assembly-figure-1stitch-all-saved-panel-pngs-into-a-single-600-dpi-figure-using-pil.">5. Assembly — Figure 1Stitch all saved panel PNGs into a single 600 DPI figure using PIL.</a>
+  <ul class="collapse">
+  <li><a href="#final-figure-1" id="toc-final-figure-1" class="nav-link" data-scroll-target="#final-figure-1">Final Figure 1</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Whorlmap Demo</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Bootstrap distributions as brain-wide pixel mosaics</strong></p>
+<p>This notebook generates Figure 1 from <em>Getting over ANOVA: Estimation graphics for multi-group comparisons</em> (Lu, Anns, Mai, Xu et al., 2026).</p>
+<p>Each cell in a whorlmap encodes a <strong>full bootstrap distribution</strong> in 7x7 pixels. Pixels are filled via an outside-in spiral; position encodes quantile rank and colour encodes effect size.</p>
+<p><strong>Runtime:</strong> approx 15 min total (numba JIT compilation ~1 min; 260 bootstrap comparisons ~10-15 min)</p>
+<p><strong>Run order:</strong> <code>Runtime -&gt; Run all</code>, or execute cells top-to-bottom.</p>
+<div id="cell-2" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install DABEST (whorlmap + multi-comparison support)!pip install -q "dabest==2025.3.27"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-3" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> osif <span class="kw">not</span> os.path.exists(<span class="st">'/content/whorlmap-paper'</span>):    <span class="op">!</span>git clone <span class="op">--</span>quiet <span class="op">--</span>depth <span class="dv">1</span> https:<span class="op">//</span>github.com<span class="op">/</span>sangyu<span class="op">/</span>whorlmap<span class="op">-</span>paper.git <span class="op">/</span>content<span class="op">/</span>whorlmap<span class="op">-</span>paper<span class="op">%</span>cd <span class="op">/</span>content<span class="op">/</span>whorlmap<span class="op">-</span>paper<span class="op">/</span>nbs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">1. Setup</h2>
+<div id="cell-5" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline<span class="op">%</span>config InlineBackend.figure_format <span class="op">=</span> <span class="st">'retina'</span><span class="im">import</span> pathlib, pickle, gzip, warningsimport numpy <span class="im">as</span> npimport pandas <span class="im">as</span> pdimport matplotlib.pyplot <span class="im">as</span> pltimport matplotlib.patches <span class="im">as</span> mpatchesfrom matplotlib.colors <span class="im">import</span> LinearSegmentedColormap, Normalize, TwoSlopeNormfrom matplotlib.colorbar <span class="im">import</span> ColorbarBasefrom matplotlib.cm <span class="im">import</span> ScalarMappablefrom matplotlib.patches <span class="im">import</span> Rectangle <span class="im">as</span> _Rectfrom matplotlib.lines <span class="im">import</span> Line2D <span class="im">as</span> _L2Dfrom scipy.stats <span class="im">import</span> gaussian_kde <span class="im">as</span> _gkdeimport seaborn <span class="im">as</span> snsimport dabestfrom dabest.multi <span class="im">import</span> combinefrom IPython.display <span class="im">import</span> Image <span class="im">as</span> IPImage, displayplt.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">9</span>, <span class="st">'axes.titlesize'</span>: <span class="dv">10</span>})IMAGES <span class="op">=</span> pathlib.Path(<span class="st">'images'</span>)IMAGES.mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-6" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CMAP_SWOR: used in Panels A and B (wider range, 4-stop)CMAP_SWOR = LinearSegmentedColormap.from_list(    'steelwhiteorangered',    [(0.00, (70/255, 130/255, 180/255)),     (0.50, (1.0,   1.0,   1.0  )),     (0.75, (1.0,   0.55,  0.0  )),     (1.00, (0.86,  0.08,  0.24 ))],    N=256,)# CMAP: used in Panel C (steelblue-white-orangered, symmetric)CMAP  = LinearSegmentedColormap.from_list(    'swo', ['steelblue', 'white', 'orangered'], N=256)DNORM = TwoSlopeNorm(vcenter=0, vmin=-3.5, vmax=3.5)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-7" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _spiralize(fill, m, n):    i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> array <span class="op">=</span> np.zeros((m, n))    <span class="cf">while</span> m <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> k <span class="op">&lt;</span> <span class="bu">len</span>(fill):        jj <span class="op">=</span> j<span class="op">;</span> ii <span class="op">=</span> i        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(j, n):            <span class="cf">if</span> k <span class="op">&gt;=</span> <span class="bu">len</span>(fill): <span class="cf">break</span>            array[i, j] <span class="op">=</span> fill[k]<span class="op">;</span> k <span class="op">+=</span> <span class="dv">1</span>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(ii <span class="op">+</span> <span class="dv">1</span>, m):            <span class="cf">if</span> k <span class="op">&gt;=</span> <span class="bu">len</span>(fill): <span class="cf">break</span>            array[i, j] <span class="op">=</span> fill[k]<span class="op">;</span> k <span class="op">+=</span> <span class="dv">1</span>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">2</span>, jj <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):            <span class="cf">if</span> k <span class="op">&gt;=</span> <span class="bu">len</span>(fill): <span class="cf">break</span>            array[i, j] <span class="op">=</span> fill[k]<span class="op">;</span> k <span class="op">+=</span> <span class="dv">1</span>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(m <span class="op">-</span> <span class="dv">2</span>, ii, <span class="op">-</span><span class="dv">1</span>):            <span class="cf">if</span> k <span class="op">&gt;=</span> <span class="bu">len</span>(fill): <span class="cf">break</span>            array[i, j] <span class="op">=</span> fill[k]<span class="op">;</span> k <span class="op">+=</span> <span class="dv">1</span>        m <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span> n <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">+=</span> <span class="dv">1</span>    <span class="cf">return</span> arraydef _spiral_path(n):    path <span class="op">=</span> []    top, bot, lft, rgt <span class="op">=</span> <span class="dv">0</span>, n <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>, n <span class="op">-</span> <span class="dv">1</span>    <span class="cf">while</span> top <span class="op">&lt;=</span> bot <span class="kw">and</span> lft <span class="op">&lt;=</span> rgt:        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(lft, rgt <span class="op">+</span> <span class="dv">1</span>): path.append((top, c))        top <span class="op">+=</span> <span class="dv">1</span>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(top, bot <span class="op">+</span> <span class="dv">1</span>): path.append((r, rgt))        rgt <span class="op">-=</span> <span class="dv">1</span>        <span class="cf">if</span> top <span class="op">&lt;=</span> bot:            <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(rgt, lft <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>): path.append((bot, c))            bot <span class="op">-=</span> <span class="dv">1</span>        <span class="cf">if</span> lft <span class="op">&lt;=</span> rgt:            <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(bot, top <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>): path.append((r, lft))            lft <span class="op">+=</span> <span class="dv">1</span>    <span class="cf">return</span> pathdef _ring_structure(n):    rings, pos, k <span class="op">=</span> [], <span class="dv">0</span>, <span class="dv">0</span>    <span class="cf">while</span> <span class="va">True</span>:        sz <span class="op">=</span> n <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> k        <span class="cf">if</span> sz <span class="op">&lt;=</span> <span class="dv">0</span>: <span class="cf">break</span>        nc <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> sz <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">4</span> <span class="op">*</span> (sz <span class="op">-</span> <span class="dv">1</span>)        rings.append({<span class="st">'k'</span>: k, <span class="st">'start'</span>: pos, <span class="st">'end'</span>: pos <span class="op">+</span> nc, <span class="st">'sz'</span>: sz})        pos <span class="op">+=</span> nc<span class="op">;</span> k <span class="op">+=</span> <span class="dv">1</span>        <span class="cf">if</span> sz <span class="op">==</span> <span class="dv">1</span>: <span class="cf">break</span>    <span class="cf">return</span> rings</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="panel-a-from-bootstrap-distribution-to-whorl-cellwe-start-with-a-simple-synthetic-two-group-comparison-n-20-per-group-to-show-the-encoding-step-by-step--ai-gardner-altman-plot-the-raw-data-and-the-floating-bootstrap-mean-difference-with-95-ci.--aii-whorl-cell-the-same-bootstrap-distribution-re-encoded-as-a-7x7-pixel-grid-filled-via-outside-in-spiral.-each-pixel-represents-one-quantile-rank-its-colour-is-the-effect-size-at-that-quantile.--aiii-stacked-histogram-the-bootstrap-distribution-segmented-by-the-same-quantile-boundaries-with-colours-matching-aii." class="level2">
+<h2 class="anchored" data-anchor-id="panel-a-from-bootstrap-distribution-to-whorl-cellwe-start-with-a-simple-synthetic-two-group-comparison-n-20-per-group-to-show-the-encoding-step-by-step--ai-gardner-altman-plot-the-raw-data-and-the-floating-bootstrap-mean-difference-with-95-ci.--aii-whorl-cell-the-same-bootstrap-distribution-re-encoded-as-a-7x7-pixel-grid-filled-via-outside-in-spiral.-each-pixel-represents-one-quantile-rank-its-colour-is-the-effect-size-at-that-quantile.--aiii-stacked-histogram-the-bootstrap-distribution-segmented-by-the-same-quantile-boundaries-with-colours-matching-aii.">2. Panel A — From Bootstrap Distribution to Whorl CellWe start with a simple synthetic two-group comparison (n = 20 per group) to show the encoding step-by-step:- <strong>Ai</strong> (Gardner-Altman plot): the raw data and the floating bootstrap mean difference with 95% CI.- <strong>Aii</strong> (whorl cell): the same bootstrap distribution, re-encoded as a 7x7 pixel grid filled via outside-in spiral. Each pixel represents one quantile rank; its colour is the effect size at that quantile.- <strong>Aiii</strong> (stacked histogram): the bootstrap distribution segmented by the same quantile boundaries, with colours matching Aii.</h2>
+<div id="cell-9" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Synthetic two-group data (seed fixed for reproducibility)_rng    = np.random.default_rng(42)noise_a = _rng.normal(0, 3., 20)noise_b = _rng.normal(0, 3., 20)group_a = noise_a - noise_a.mean()group_b = noise_b - noise_b.mean() + 0.5_df_a   = pd.DataFrame({'group': ['A'] * 20 + ['B'] * 20,                         'value': np.concatenate([group_a, group_b])})_dobj_a = dabest.load(_df_a, x='group', y='value', idx=('A', 'B'))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="panel-ai-gardner-altman-estimation-plot" class="level3">
+<h3 class="anchored" data-anchor-id="panel-ai-gardner-altman-estimation-plot">2.1 Panel Ai — Gardner-Altman estimation plot</h3>
+<div id="cell-11" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig_ai <span class="op">=</span> _dobj_a.mean_diff.plot(fig_size<span class="op">=</span>(<span class="fl">4.5</span>, <span class="dv">5</span>), float_contrast<span class="op">=</span><span class="va">True</span>, show_pairs<span class="op">=</span><span class="va">False</span>)fig_ai.savefig(IMAGES <span class="op">/</span> <span class="st">'panel_ai.svg'</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)fig_ai.savefig(IMAGES <span class="op">/</span> <span class="st">'panel_ai.png'</span>, dpi<span class="op">=</span><span class="dv">600</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="panels-aii-aiii-whorl-cell-segmented-histogramthe-bootstrap-distribution-5-000-resamples-2.5-tails-removed-is-ranked-and-assigned-to-the-72-49-pixels-via-outside-in-spiral-ordering.-the-outermost-ring-q0-q23-spans-the-most-extreme-values-the-innermost-pixel-q48-holds-the-median." class="level3">
+<h3 class="anchored" data-anchor-id="panels-aii-aiii-whorl-cell-segmented-histogramthe-bootstrap-distribution-5-000-resamples-2.5-tails-removed-is-ranked-and-assigned-to-the-72-49-pixels-via-outside-in-spiral-ordering.-the-outermost-ring-q0-q23-spans-the-most-extreme-values-the-innermost-pixel-q48-holds-the-median.">2.2 Panels Aii &amp; Aiii — Whorl cell + segmented histogramThe bootstrap distribution (5 000 resamples, 2.5% tails removed) is ranked and assigned to the 7^2 = 49 pixels via outside-in spiral ordering. The outermost ring (q0-q23) spans the most extreme values; the innermost pixel (q48) holds the median.</h3>
+<div id="cell-13" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>_multi_a <span class="op">=</span> combine([[_dobj_a]], [<span class="st">'gene'</span>], row_labels<span class="op">=</span>[<span class="st">'region'</span>], effect_size<span class="op">=</span><span class="st">'mean_diff'</span>)bs_raw   <span class="op">=</span> <span class="bu">sorted</span>(_multi_a.bootstraps[<span class="dv">0</span>])chop     <span class="op">=</span> <span class="bu">int</span>(np.ceil(<span class="bu">len</span>(bs_raw) <span class="op">*</span> <span class="fl">0.025</span>))bs_c     <span class="op">=</span> bs_raw[chop:<span class="op">-</span>chop]n <span class="op">=</span> <span class="dv">7</span><span class="op">;</span> N <span class="op">=</span> n <span class="op">*</span> nranks <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="bu">len</span>(bs_c), N, dtype<span class="op">=</span><span class="bu">int</span>)<span class="op">;</span> ranks[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span><span class="er">fv</span>    <span class="op">=</span> np.array([bs_c[r <span class="op">-</span> <span class="dv">1</span>] <span class="cf">for</span> r <span class="kw">in</span> ranks])<span class="cf">if</span> <span class="bu">sum</span>(v <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">for</span> v <span class="kw">in</span> bs_c) <span class="op">&lt;</span> <span class="bu">len</span>(bs_c) <span class="op">/</span> <span class="dv">2</span>:    fv <span class="op">=</span> fv[::<span class="op">-</span><span class="dv">1</span>]XLIM       <span class="op">=</span> (<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>)rings      <span class="op">=</span> _ring_structure(n)fv_sorted  <span class="op">=</span> np.clip(np.sort(fv), <span class="op">*</span>XLIM)cell_vals  <span class="op">=</span> _spiralize(fv.tolist(), n, n)bound      <span class="op">=</span> <span class="bu">max</span>(<span class="fl">2.0</span>, np.ceil(<span class="bu">max</span>(<span class="bu">abs</span>(fv_sorted[<span class="dv">0</span>]), <span class="bu">abs</span>(fv_sorted[<span class="op">-</span><span class="dv">1</span>])) <span class="op">*</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">2</span>)VALUE_NORM <span class="op">=</span> Normalize(vmin<span class="op">=-</span>bound, vmax<span class="op">=</span>bound)spiral_pos <span class="op">=</span> _spiral_path(n)fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="fl">5.4</span>))ax_cell <span class="op">=</span> fig.add_axes([<span class="fl">0.03</span>, <span class="fl">0.18</span>, <span class="fl">0.32</span>, <span class="fl">0.68</span>])ax_cbar <span class="op">=</span> fig.add_axes([<span class="fl">0.03</span>, <span class="fl">0.08</span>, <span class="fl">0.32</span>, <span class="fl">0.05</span>])ax_hist <span class="op">=</span> fig.add_axes([<span class="fl">0.43</span>, <span class="fl">0.12</span>, <span class="fl">0.54</span>, <span class="fl">0.74</span>])ax_cell.imshow(cell_vals, cmap<span class="op">=</span>CMAP_SWOR, norm<span class="op">=</span>VALUE_NORM,               origin<span class="op">=</span><span class="st">'upper'</span>, interpolation<span class="op">=</span><span class="st">'nearest'</span>, aspect<span class="op">=</span><span class="st">'equal'</span>)<span class="kw">def</span> _ring_arrows(ax, ring_k, sz, avg_val):    mid <span class="op">=</span> ring_k <span class="op">+</span> sz <span class="op">//</span> <span class="dv">2</span>    bg  <span class="op">=</span> CMAP_SWOR(VALUE_NORM(avg_val))    col <span class="op">=</span> <span class="st">'w'</span> <span class="cf">if</span> (<span class="fl">0.299</span><span class="op">*</span>bg[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.587</span><span class="op">*</span>bg[<span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.114</span><span class="op">*</span>bg[<span class="dv">2</span>]) <span class="op">&lt;</span> <span class="fl">0.52</span> <span class="cf">else</span> <span class="st">'k'</span>    ap  <span class="op">=</span> <span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span>col, lw<span class="op">=</span><span class="fl">1.0</span>, mutation_scale<span class="op">=</span><span class="dv">9</span>)    d   <span class="op">=</span> <span class="fl">0.25</span>    ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(mid<span class="op">+</span><span class="fl">0.6</span>, ring_k<span class="op">-</span>d),          xytext<span class="op">=</span>(mid<span class="op">-</span><span class="fl">0.6</span>, ring_k<span class="op">-</span>d),          arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)    ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d, mid<span class="op">+</span><span class="fl">0.6</span>),     xytext<span class="op">=</span>(ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d, mid<span class="op">-</span><span class="fl">0.6</span>),     arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)    ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(mid<span class="op">-</span><span class="fl">0.6</span>, ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d),     xytext<span class="op">=</span>(mid<span class="op">+</span><span class="fl">0.6</span>, ring_k<span class="op">+</span>sz<span class="op">-</span><span class="dv">1</span><span class="op">+</span>d),     arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)    ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(ring_k<span class="op">-</span>d, mid<span class="op">-</span><span class="fl">0.6</span>),           xytext<span class="op">=</span>(ring_k<span class="op">-</span>d, mid<span class="op">+</span><span class="fl">0.6</span>),           arrowprops<span class="op">=</span>ap, zorder<span class="op">=</span><span class="dv">8</span>, annotation_clip<span class="op">=</span><span class="va">False</span>)<span class="cf">for</span> ring <span class="kw">in</span> rings[:<span class="op">-</span><span class="dv">1</span>]:    avg_val <span class="op">=</span> <span class="bu">float</span>(np.mean(fv_sorted[ring[<span class="st">'start'</span>]:ring[<span class="st">'end'</span>]]))    _ring_arrows(ax_cell, ring[<span class="st">'k'</span>], ring[<span class="st">'sz'</span>], avg_val)<span class="cf">for</span> k, (r, c) <span class="kw">in</span> <span class="bu">enumerate</span>(spiral_pos):    val <span class="op">=</span> <span class="bu">float</span>(fv[k])    bg  <span class="op">=</span> CMAP_SWOR(VALUE_NORM(val))    lum <span class="op">=</span> <span class="fl">0.299</span><span class="op">*</span>bg[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.587</span><span class="op">*</span>bg[<span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.114</span><span class="op">*</span>bg[<span class="dv">2</span>]    tc  <span class="op">=</span> <span class="st">'w'</span> <span class="cf">if</span> lum <span class="op">&lt;</span> <span class="fl">0.52</span> <span class="cf">else</span> <span class="st">'k'</span>    ax_cell.text(c, r, <span class="ss">f'q</span><span class="sc">{</span>k<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>val<span class="sc">:.1f}</span><span class="ss">'</span>,                 ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="fl">4.5</span>, color<span class="op">=</span>tc,                 zorder<span class="op">=</span><span class="dv">10</span>, linespacing<span class="op">=</span><span class="fl">1.1</span>, multialignment<span class="op">=</span><span class="st">'center'</span>)ax_cell.set_xlim(<span class="op">-</span><span class="fl">0.5</span>, n <span class="op">-</span> <span class="fl">0.5</span>)<span class="op">;</span> ax_cell.set_ylim(n <span class="op">-</span> <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.5</span>)ax_cell.axis(<span class="st">'off'</span>)ax_cell.set_title(<span class="st">'7x7 whorl cell - outside-in spiral fill</span><span class="ch">\n</span><span class="st">(pixel colour = effect size)'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)cb <span class="op">=</span> ColorbarBase(ax_cbar, cmap<span class="op">=</span>CMAP_SWOR, norm<span class="op">=</span>VALUE_NORM, orientation<span class="op">=</span><span class="st">'horizontal'</span>)cb_ticks <span class="op">=</span> np.arange(<span class="op">-</span>bound, bound <span class="op">+</span> <span class="fl">0.01</span>, <span class="fl">0.5</span>)cb.set_ticks(cb_ticks)<span class="op">;</span> cb.set_ticklabels([<span class="ss">f'</span><span class="sc">{</span>t<span class="sc">:g}</span><span class="ss">'</span> <span class="cf">for</span> t <span class="kw">in</span> cb_ticks])cb.ax.tick_params(labelsize<span class="op">=</span><span class="fl">7.5</span>)cb.set_label(<span class="st">'Effect size (bootstrap mean difference)'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)BIN_W <span class="op">=</span> <span class="fl">0.20</span><span class="er">bins</span>  <span class="op">=</span> np.arange(XLIM[<span class="dv">0</span>], XLIM[<span class="dv">1</span>] <span class="op">+</span> BIN_W, BIN_W)counts, _ <span class="op">=</span> np.histogram(np.clip(bs_c, <span class="op">*</span>XLIM), bins<span class="op">=</span>bins, density<span class="op">=</span><span class="va">True</span>)seg_bounds <span class="op">=</span> np.empty(N <span class="op">+</span> <span class="dv">1</span>)seg_bounds[<span class="dv">0</span>] <span class="op">=</span> XLIM[<span class="dv">0</span>]<span class="op">;</span> seg_bounds[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> XLIM[<span class="dv">1</span>]<span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, N):    seg_bounds[k] <span class="op">=</span> (fv_sorted[k <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> fv_sorted[k]) <span class="op">/</span> <span class="fl">2.0</span><span class="er">seg_cols</span> <span class="op">=</span> [CMAP_SWOR(VALUE_NORM(<span class="bu">float</span>(v))) <span class="cf">for</span> v <span class="kw">in</span> fv_sorted]best_piece <span class="op">=</span> {}<span class="cf">for</span> lo, hi, ht <span class="kw">in</span> <span class="bu">zip</span>(bins[:<span class="op">-</span><span class="dv">1</span>], bins[<span class="dv">1</span>:], counts):    <span class="cf">if</span> ht <span class="op">==</span> <span class="dv">0</span>: <span class="cf">continue</span>    y_bot <span class="op">=</span> <span class="fl">0.0</span>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(N):        overlap <span class="op">=</span> <span class="bu">max</span>(<span class="fl">0.</span>, <span class="bu">min</span>(hi, seg_bounds[k <span class="op">+</span> <span class="dv">1</span>]) <span class="op">-</span> <span class="bu">max</span>(lo, seg_bounds[k]))        <span class="cf">if</span> overlap <span class="op">&lt;=</span> <span class="dv">0</span>: <span class="cf">continue</span>        h <span class="op">=</span> ht <span class="op">*</span> overlap <span class="op">/</span> (hi <span class="op">-</span> lo)        ax_hist.bar(lo, h, width<span class="op">=</span>hi <span class="op">-</span> lo, bottom<span class="op">=</span>y_bot, align<span class="op">=</span><span class="st">'edge'</span>,                    color<span class="op">=</span>seg_cols[k], edgecolor<span class="op">=</span><span class="st">'none'</span>)        <span class="cf">if</span> k <span class="kw">not</span> <span class="kw">in</span> best_piece <span class="kw">or</span> h <span class="op">&gt;</span> best_piece[k][<span class="dv">2</span>]:            best_piece[k] <span class="op">=</span> (lo <span class="op">+</span> (hi <span class="op">-</span> lo) <span class="op">/</span> <span class="dv">2</span>, y_bot, h)        y_bot <span class="op">+=</span> hfor k, (xc, yb, h) <span class="kw">in</span> best_piece.items():    <span class="cf">if</span> h <span class="op">&lt;</span> counts.<span class="bu">max</span>() <span class="op">*</span> <span class="fl">0.005</span>: <span class="cf">continue</span>    val <span class="op">=</span> <span class="bu">float</span>(fv_sorted[k])    col <span class="op">=</span> CMAP_SWOR(VALUE_NORM(val))    lum <span class="op">=</span> <span class="fl">0.299</span><span class="op">*</span>col[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.587</span><span class="op">*</span>col[<span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.114</span><span class="op">*</span>col[<span class="dv">2</span>]    tc  <span class="op">=</span> <span class="st">'w'</span> <span class="cf">if</span> lum <span class="op">&lt;</span> <span class="fl">0.52</span> <span class="cf">else</span> <span class="st">'k'</span>    ax_hist.text(xc, yb <span class="op">+</span> h <span class="op">/</span> <span class="dv">2</span>, <span class="ss">f'q</span><span class="sc">{</span>k<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>val<span class="sc">:.1f}</span><span class="ss">'</span>,                 ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="fl">3.5</span>, color<span class="op">=</span>tc,                 zorder<span class="op">=</span><span class="dv">11</span>, linespacing<span class="op">=</span><span class="fl">1.0</span>, multialignment<span class="op">=</span><span class="st">'center'</span>)margin <span class="op">=</span> (fv_sorted[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> fv_sorted[<span class="dv">0</span>]) <span class="op">*</span> <span class="fl">0.08</span><span class="er">ax_hist</span>.set_xlim(fv_sorted[<span class="dv">0</span>] <span class="op">-</span> margin, fv_sorted[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> margin)ax_hist.set_ylim(<span class="dv">0</span>, counts.<span class="bu">max</span>() <span class="op">*</span> <span class="fl">1.03</span>)<span class="cf">for</span> sp <span class="kw">in</span> [<span class="st">'left'</span>, <span class="st">'right'</span>, <span class="st">'top'</span>]:    ax_hist.spines[sp].set_visible(<span class="va">False</span>)ax_hist.set_yticks([])ax_hist.tick_params(labelsize<span class="op">=</span><span class="dv">8</span>)ax_hist.set_xlabel(<span class="st">'Bootstrap mean difference'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)ax_hist.set_title(<span class="st">'Bootstrap distribution, segmented by quantile rank</span><span class="ch">\n</span><span class="st">'</span>                  <span class="st">'(bar colours match spiral position on left)'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)fig.savefig(IMAGES <span class="op">/</span> <span class="st">'panel_a.svg'</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)fig.savefig(IMAGES <span class="op">/</span> <span class="st">'panel_a.png'</span>, dpi<span class="op">=</span><span class="dv">600</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="panel-b-bootstrap-distribution-taxonomyfive-stylised-distributions-show-how-different-statistical-patterns-map-onto-different-whorl-cell-appearances-panel-distribution-what-to-look-for----bi-large-positive-narrow-ci-solid-warm-orange-red-outer-ring-bii-large-negative-narrow-ci-solid-cool-blue-outer-ring-biii-near-zero-effect-pale-cell-small-n-no-signal-biv-broad-uncertain-mixed-warm-and-cool-in-outer-ring-bv-bimodal-discrete-n2-two-colour-checkerboard" class="level2">
+<h2 class="anchored" data-anchor-id="panel-b-bootstrap-distribution-taxonomyfive-stylised-distributions-show-how-different-statistical-patterns-map-onto-different-whorl-cell-appearances-panel-distribution-what-to-look-for----bi-large-positive-narrow-ci-solid-warm-orange-red-outer-ring-bii-large-negative-narrow-ci-solid-cool-blue-outer-ring-biii-near-zero-effect-pale-cell-small-n-no-signal-biv-broad-uncertain-mixed-warm-and-cool-in-outer-ring-bv-bimodal-discrete-n2-two-colour-checkerboard">3. Panel B — Bootstrap Distribution TaxonomyFive stylised distributions show how different statistical patterns map onto different whorl cell appearances:| Panel | Distribution | What to look for ||——-|————-|——————|| Bi | Large positive, narrow CI | Solid warm (orange-red) outer ring || Bii | Large negative, narrow CI | Solid cool (blue) outer ring || Biii | Near-zero effect | Pale cell — small n, no signal || Biv | Broad / uncertain | Mixed warm and cool in outer ring || Bv | Bimodal (discrete, N=2) | Two-colour checkerboard |</h2>
+<div id="cell-15" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _make_1x1_multi(ga, gb):    df   <span class="op">=</span> pd.DataFrame({<span class="st">'group'</span>: [<span class="st">'A'</span>] <span class="op">*</span> <span class="bu">len</span>(ga) <span class="op">+</span> [<span class="st">'B'</span>] <span class="op">*</span> <span class="bu">len</span>(gb),                         <span class="st">'value'</span>: np.concatenate([ga, gb])})    dobj <span class="op">=</span> dabest.load(df, x<span class="op">=</span><span class="st">'group'</span>, y<span class="op">=</span><span class="st">'value'</span>, idx<span class="op">=</span>(<span class="st">'A'</span>, <span class="st">'B'</span>))    <span class="cf">return</span> combine([[dobj]], [<span class="st">''</span>], row_labels<span class="op">=</span>[<span class="st">''</span>], effect_size<span class="op">=</span><span class="st">'mean_diff'</span>)_rng2 <span class="op">=</span> np.random.default_rng(<span class="dv">1234</span>)_ga1  <span class="op">=</span> _rng2.normal(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="dv">22</span>)<span class="op">;</span>  _gb1 <span class="op">=</span> _rng2.normal( <span class="fl">3.0</span>, <span class="fl">1.5</span>, <span class="dv">22</span>)_ga2  <span class="op">=</span> _rng2.normal(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="dv">22</span>)<span class="op">;</span>  _gb2 <span class="op">=</span> _rng2.normal(<span class="op">-</span><span class="fl">3.0</span>, <span class="fl">1.5</span>, <span class="dv">22</span>)_ga3  <span class="op">=</span> _rng2.normal(<span class="dv">0</span>, <span class="fl">0.4</span>, <span class="dv">5</span>)<span class="op">;</span>   _gb3 <span class="op">=</span> _rng2.normal( <span class="fl">0.05</span>, <span class="fl">0.4</span>, <span class="dv">5</span>)_ga4  <span class="op">=</span> _rng2.normal(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">15</span>)<span class="op">;</span>  _gb4 <span class="op">=</span> _rng2.normal( <span class="fl">0.3</span>,  <span class="fl">6.0</span>, <span class="dv">15</span>)_ga5  <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>])_gb5  <span class="op">=</span> np.array([<span class="fl">2.1</span>, <span class="dv">2</span>, <span class="fl">2.05</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="fl">3.05</span>])scenarios <span class="op">=</span> [    (<span class="st">'(i) Large positive,</span><span class="ch">\n</span><span class="st">narrow'</span>,       _make_1x1_multi(_ga1, _gb1)),    (<span class="st">'(ii) Large negative,</span><span class="ch">\n</span><span class="st">narrow'</span>,      _make_1x1_multi(_ga2, _gb2)),    (<span class="st">'(iii) Near-zero</span><span class="ch">\n</span><span class="st">effect'</span>,           _make_1x1_multi(_ga3, _gb3)),    (<span class="st">'(iv) Broad / uncertain</span><span class="ch">\n</span><span class="st">(wide CI)'</span>, _make_1x1_multi(_ga4, _gb4)),    (<span class="st">'(v) Bimodal</span><span class="ch">\n</span><span class="st">(discrete, N=2)'</span>,      _make_1x1_multi(_ga5, _gb5)),]XLIM_B <span class="op">=</span> (<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>)<span class="op">;</span>  BIN_W_B <span class="op">=</span> <span class="fl">0.14</span><span class="er">BINS_B</span> <span class="op">=</span> np.arange(XLIM_B[<span class="dv">0</span>], XLIM_B[<span class="dv">1</span>] <span class="op">+</span> BIN_W_B, BIN_W_B)BINCX  <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (BINS_B[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> BINS_B[<span class="dv">1</span>:])hists_b <span class="op">=</span> []<span class="cf">for</span> _, multi_s <span class="kw">in</span> scenarios:    bs <span class="op">=</span> np.clip(multi_s.bootstraps[<span class="dv">0</span>], <span class="op">*</span>XLIM_B)    counts_s, _ <span class="op">=</span> np.histogram(bs, bins<span class="op">=</span>BINS_B, density<span class="op">=</span><span class="va">True</span>)    hists_b.append(counts_s)ymax_b <span class="op">=</span> <span class="bu">max</span>(h.<span class="bu">max</span>() <span class="cf">for</span> h <span class="kw">in</span> hists_b) <span class="op">*</span> <span class="fl">1.05</span><span class="er">fig_b</span>, axes_b <span class="op">=</span> plt.subplots(    <span class="dv">2</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>),    gridspec_kw<span class="op">=</span>{<span class="st">'hspace'</span>: <span class="fl">0.08</span>, <span class="st">'wspace'</span>: <span class="fl">0.35</span>, <span class="st">'height_ratios'</span>: [<span class="fl">1.8</span>, <span class="dv">1</span>]},)<span class="cf">for</span> j, ((label, multi_s), counts_s) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(scenarios, hists_b)):    <span class="cf">with</span> warnings.catch_warnings():        warnings.simplefilter(<span class="st">'ignore'</span>)        multi_s.whorlmap(            n<span class="op">=</span><span class="dv">21</span>, chop_tail<span class="op">=</span><span class="fl">2.5</span>, cmap<span class="op">=</span>CMAP, vmin<span class="op">=-</span><span class="fl">3.5</span>, vmax<span class="op">=</span><span class="fl">3.5</span>,            ax<span class="op">=</span>axes_b[<span class="dv">0</span>, j],            heatmap_kwargs<span class="op">=</span>{<span class="st">'cbar'</span>: <span class="va">False</span>, <span class="st">'xticklabels'</span>: [<span class="st">''</span>], <span class="st">'yticklabels'</span>: [<span class="st">''</span>],                            <span class="st">'linewidths'</span>: <span class="dv">0</span>},        )    axes_b[<span class="dv">0</span>, j].set_aspect(<span class="st">'equal'</span>)    <span class="cf">for</span> _c <span class="kw">in</span> axes_b[<span class="dv">0</span>, j].collections:        _c.set_rasterized(<span class="va">True</span>)    ax <span class="op">=</span> axes_b[<span class="dv">1</span>, j]    cols <span class="op">=</span> CMAP(DNORM(BINCX))    <span class="cf">for</span> lo, hi, ht, c <span class="kw">in</span> <span class="bu">zip</span>(BINS_B[:<span class="op">-</span><span class="dv">1</span>], BINS_B[<span class="dv">1</span>:], counts_s, cols):        ax.bar(lo, ht, width<span class="op">=</span>hi <span class="op">-</span> lo, align<span class="op">=</span><span class="st">'edge'</span>, color<span class="op">=</span>c,               edgecolor<span class="op">=</span><span class="st">'lightgray'</span>, linewidth<span class="op">=</span><span class="fl">.5</span>)    ax.set_xlim(<span class="op">*</span>XLIM_B)<span class="op">;</span>  ax.set_ylim(<span class="dv">0</span>, ymax_b)    ax.spines[<span class="st">'left'</span>].set_position(<span class="st">'zero'</span>)    ax.spines[<span class="st">'right'</span>].set_visible(<span class="va">False</span>)<span class="op">;</span>  ax.spines[<span class="st">'top'</span>].set_visible(<span class="va">False</span>)    ax.set_yticks([])<span class="op">;</span>  ax.set_xticks([<span class="op">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>])<span class="op">;</span>  ax.tick_params(labelsize<span class="op">=</span><span class="dv">7</span>)    ax.text(<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.42</span>, label, transform<span class="op">=</span>ax.transAxes,            ha<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="fl">8.5</span>, va<span class="op">=</span><span class="st">'top'</span>, linespacing<span class="op">=</span><span class="fl">1.3</span>)fig_b.subplots_adjust(top<span class="op">=</span><span class="fl">0.92</span>, right<span class="op">=</span><span class="fl">0.88</span>)fig_b.text(<span class="fl">0.5</span>, <span class="fl">0.99</span>, <span class="st">' '</span>, fontsize<span class="op">=</span><span class="dv">14</span>, va<span class="op">=</span><span class="st">'top'</span>, color<span class="op">=</span><span class="st">'white'</span>)cbar_ax_b <span class="op">=</span> fig_b.add_axes([<span class="fl">0.90</span>, <span class="fl">0.18</span>, <span class="fl">0.015</span>, <span class="fl">0.60</span>])sm_b <span class="op">=</span> ScalarMappable(cmap<span class="op">=</span>CMAP, norm<span class="op">=</span>DNORM)sm_b.set_array([])cbar_b <span class="op">=</span> fig_b.colorbar(sm_b, cax<span class="op">=</span>cbar_ax_b)cbar_b.set_label(<span class="st">'Effect size'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)cbar_b.set_ticks([<span class="op">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>])<span class="op">;</span>  cbar_b.ax.tick_params(labelsize<span class="op">=</span><span class="dv">7</span>)fig_b.savefig(IMAGES <span class="op">/</span> <span class="st">'panel_b.svg'</span>, dpi<span class="op">=</span><span class="dv">600</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)fig_b.savefig(IMAGES <span class="op">/</span> <span class="st">'panel_b.png'</span>, dpi<span class="op">=</span><span class="dv">600</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="panel-c-gtex-sex-differences-in-brain-gene-expressionthe-question-do-any-of-these-20-neuroactive-glial-genes-show-sex-differences-female---male-log2-tpm1-in-human-brain-and-if-so-wherethe-data-gtex-v8-13-brain-regions-male-n-100-200-female-n-50-100-per-region.-effect-size-bootstrap-mean-difference-5-000-resamples.the-highlighted-pairs-reveal-something-a-scalar-heatmap-hides--pair-a-blue-sstspinal-cord-a1-and-fkbp5putamen-a2-have-similar-scalar-means-but-their-bootstrap-distributions-differ-dramatically-in-width.--pair-b-maroon-aif1substantia-nigra-b1-and-cyp19a1caudate-b2-have-similar-means-but-different-distributional-shapes." class="level2">
+<h2 class="anchored" data-anchor-id="panel-c-gtex-sex-differences-in-brain-gene-expressionthe-question-do-any-of-these-20-neuroactive-glial-genes-show-sex-differences-female---male-log2-tpm1-in-human-brain-and-if-so-wherethe-data-gtex-v8-13-brain-regions-male-n-100-200-female-n-50-100-per-region.-effect-size-bootstrap-mean-difference-5-000-resamples.the-highlighted-pairs-reveal-something-a-scalar-heatmap-hides--pair-a-blue-sstspinal-cord-a1-and-fkbp5putamen-a2-have-similar-scalar-means-but-their-bootstrap-distributions-differ-dramatically-in-width.--pair-b-maroon-aif1substantia-nigra-b1-and-cyp19a1caudate-b2-have-similar-means-but-different-distributional-shapes.">4. Panel C — GTEx Sex Differences in Brain Gene Expression<strong>The question:</strong> Do any of these 20 neuroactive / glial genes show sex differences (Female - Male, log2 TPM+1) in human brain, and if so, where?<strong>The data:</strong> GTEx v8; 13 brain regions; male n ~ 100-200, female n ~ 50-100 per region. Effect size = bootstrap mean difference (5 000 resamples).<strong>The highlighted pairs</strong> reveal something a scalar heatmap hides:- <strong>Pair A</strong> (blue): <em>SST</em>/Spinal Cord (a1) and <em>FKBP5</em>/Putamen (a2) have similar scalar means, but their bootstrap distributions differ dramatically in width.- <strong>Pair B</strong> (maroon): <em>AIF1</em>/Substantia Nigra (b1) and <em>CYP19A1</em>/Caudate (b2) have similar means, but different distributional shapes.</h2>
+<div id="cell-17" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cache: expression values for 20 display genes (~500 KB, committed to repo).# Bootstrapping runs fresh from this cache every time.USE_CACHE = True   # set False to rebuild from full gene_expr.pklBRAIN_REGIONS = {    'Hypothalamus':      'Brain - Hypothalamus',    'Amygdala':          'Brain - Amygdala',    'Hippocampus':       'Brain - Hippocampus',    'Ant. Cing. Ctx':    'Brain - Anterior cingulate cortex (BA24)',    'Frontal Cortex':    'Brain - Frontal Cortex (BA9)',    'Cortex':            'Brain - Cortex',    'Caudate':           'Brain - Caudate (basal ganglia)',    'Putamen':           'Brain - Putamen (basal ganglia)',    'Nucleus Accumbens': 'Brain - Nucleus accumbens (basal ganglia)',    'Cerebellum':        'Brain - Cerebellum',    'Cerebellar Hemi.':  'Brain - Cerebellar Hemisphere',    'Substantia Nigra':  'Brain - Substantia nigra',    'Spinal Cord':       'Brain - Spinal cord (cervical c-1)',}RIGHT_GENES  = [    'TPH2', 'CHRNA7', 'ESR1',    'TH', 'SLC6A3', 'DDC', 'AGRP',    'SST', 'PENK', 'GAD1', 'GAD2', 'CRH',    'DRD5', 'CHRM1', 'BDNF', 'CYP19A1',    'AIF1', 'MAOA', 'FKBP5', 'GFAP',]region_order = list(BRAIN_REGIONS.keys())DATA_DIR     = pathlib.Path('gtex_data')expr_cache_path = DATA_DIR / 'figure1_expr_cache.pkl.gz'gene_expr_path  = DATA_DIR / 'gene_expr.pkl'if USE_CACHE and expr_cache_path.exists():    print('Loading expression cache ...')    with gzip.open(expr_cache_path, 'rb') as f:        _cache = pickle.load(f)    expr_subset  = _cache['expr_subset']    RIGHT_GENES  = _cache.get('gene_names',   RIGHT_GENES)    region_order = _cache.get('region_order', region_order)    print(f'  {len(expr_subset)} genes loaded from cache.')elif gene_expr_path.exists():    print('Loading full gene_expr.pkl and slicing to display genes ...')    with open(gene_expr_path, 'rb') as f:        gene_expr = pickle.load(f)    expr_subset = {gene: gene_expr[gene] for gene in RIGHT_GENES}else:    raise FileNotFoundError(        'No expression data found.\n'        '  Default path: gtex_data/figure1_expr_cache.pkl.gz\n'        '  Run helpers/make_cache.ipynb (needs gene_expr.pkl from helpers/survey.ipynb).'    )sample_meta = pd.read_csv(DATA_DIR / 'sample_meta.csv', index_col=0)print(f'sample_meta: {len(sample_meta)} samples ready.')</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-18" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is where the bootstrapping happens. Runtime: ~10-15 min.# combine() runs 5 000 resamples for each of the 13 x 20 = 260 comparisons.print('Building dabest grid (260 comparisons) ...')dabest_grid = []for region in region_order:    row = []    for gene in RIGHT_GENES:        gd   = expr_subset[gene]        mask = sample_meta['region'] == region        sids = sample_meta.index[mask]        recs = [{'expr': gd[s], 'sex': sample_meta.loc[s, 'sex']}                for s in sids if s in gd]        df   = pd.DataFrame(recs)        dobj = dabest.load(df, x='sex', y='expr', idx=('Male', 'Female'))        row.append(dobj)    dabest_grid.append(row)    print(f'  {region}', flush=True)print('Running combine() - bootstrapping all 260 distributions ...')with warnings.catch_warnings():    warnings.simplefilter('ignore')    multi_gtex = combine(dabest_grid, RIGHT_GENES,                         row_labels=region_order, effect_size='mean_diff')print('multi_gtex ready.')# Extract mean_df via a throwaway whorlmap call_fig_tmp, _ax_tmp = plt.subplots()with warnings.catch_warnings():    warnings.simplefilter('ignore')    _, mean_df = multi_gtex.whorlmap(        cmap=CMAP, chop_tail=2.5, ax=_ax_tmp,        heatmap_kwargs={'cbar': False},    )plt.close(_fig_tmp)print(f'mean_df: {mean_df.shape}')mean_df</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-19" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vabs        <span class="op">=</span> <span class="fl">1.5</span><span class="er">shared_norm</span> <span class="op">=</span> Normalize(vmin<span class="op">=-</span>vabs, vmax<span class="op">=</span>vabs)<span class="kw">def</span> _add_shared_cbar(cax, orientation<span class="op">=</span><span class="st">'horizontal'</span>):    cb <span class="op">=</span> ColorbarBase(cax, cmap<span class="op">=</span>CMAP, norm<span class="op">=</span>shared_norm, orientation<span class="op">=</span>orientation)    cb.set_label(<span class="st">'Mean diff F-M (log2 TPM+1)'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)    cb.set_ticks([<span class="op">-</span><span class="fl">1.5</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>])    cb.ax.tick_params(labelsize<span class="op">=</span><span class="dv">7</span>)_N_COLS_G  <span class="op">=</span> <span class="bu">len</span>(RIGHT_GENES)_PAIR_COL  <span class="op">=</span> [<span class="st">'#1A5276'</span>, <span class="st">'#6E2F1A'</span>]  <span class="co"># blue=A, maroon=B# (row, col, pair_idx, within_pair_idx, label)_ORDERED_CELLS = [    (12,  7, 0, 0, 'a1'),  # SST / Spinal Cord    ( 7, 18, 0, 1, 'a2'),  # FKBP5 / Putamen    (11, 16, 1, 0, 'b1'),  # AIF1 / Substantia Nigra    ( 6, 15, 1, 1, 'b2'),  # CYP19A1 / Caudate]_pair_bs = {    0: [np.asarray(multi_gtex.bootstraps[12*_N_COLS_G +  7]),        np.asarray(multi_gtex.bootstraps[ 7*_N_COLS_G + 18])],    1: [np.asarray(multi_gtex.bootstraps[11*_N_COLS_G + 16]),        np.asarray(multi_gtex.bootstraps[ 6*_N_COLS_G + 15])],}_pair_xlims = {}_pair_ymax  = {}for _pi, _blist in _pair_bs.items():    _lo = min(_b.min() - 0.3*np.std(_b) for _b in _blist)    _hi = max(_b.max() + 0.3*np.std(_b) for _b in _blist)    _pair_xlims[_pi] = (_lo, _hi)    _xr = np.linspace(_lo, _hi, 300)    _pair_ymax[_pi] = max(_gkde(_b, bw_method='silverman')(_xr).max() for _b in _blist) * 1.1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="panel-ci-whorlmap-with-bootstrap-sparklineseach-cell-is-a-7x7-whorl-cell.-the-four-highlighted-cells-are-connected-to-their-full-bootstrap-distributions-on-the-right.-within-each-pair-a-or-b-the-x-axis-is-shared-so-width-differences-are-directly-visible." class="level3">
+<h3 class="anchored" data-anchor-id="panel-ci-whorlmap-with-bootstrap-sparklineseach-cell-is-a-7x7-whorl-cell.-the-four-highlighted-cells-are-connected-to-their-full-bootstrap-distributions-on-the-right.-within-each-pair-a-or-b-the-x-axis-is-shared-so-width-differences-are-directly-visible.">4.1 Panel Ci — Whorlmap with bootstrap sparklinesEach cell is a 7x7 whorl cell. The four highlighted cells are connected to their full bootstrap distributions on the right. Within each pair (A or B), the x-axis is shared so width differences are directly visible.</h3>
+<div id="cell-21" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>FIGSIZE_BOTH <span class="op">=</span> (<span class="fl">16.5</span>, <span class="dv">8</span>)HAX_RECT     <span class="op">=</span> [<span class="fl">0.09</span>, <span class="fl">0.18</span>, <span class="fl">0.55</span>, <span class="fl">0.77</span>]CBAR_RECT    <span class="op">=</span> [<span class="fl">0.09</span>, <span class="fl">0.035</span>, <span class="fl">0.275</span>, <span class="fl">0.038</span>]_H_SPARK <span class="op">=</span> <span class="fl">0.17</span><span class="op">;</span>  _SPARK_X <span class="op">=</span> <span class="fl">0.685</span><span class="op">;</span>  _SPARK_W <span class="op">=</span> <span class="fl">0.26</span><span class="er">_SG</span> <span class="op">=</span> <span class="fl">0.02</span><span class="op">;</span>  _LG <span class="op">=</span> <span class="fl">0.06</span><span class="op">;</span>  _SB <span class="op">=</span> HAX_RECT[<span class="dv">1</span>]SPARK_RECTS <span class="op">=</span> [    [_SPARK_X, _SB <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>_H_SPARK <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>_SG <span class="op">+</span> _LG, _SPARK_W, _H_SPARK],  <span class="co"># a1 (top)    [_SPARK_X, _SB + 2*_H_SPARK + 1*_SG + _LG, _SPARK_W, _H_SPARK],  # a2    [_SPARK_X, _SB + 1*_H_SPARK + 1*_SG,        _SPARK_W, _H_SPARK],  # b1    [_SPARK_X, _SB,                              _SPARK_W, _H_SPARK],  # b2 (bottom)]fig_ci     = plt.figure(figsize=FIGSIZE_BOTH)ax_ci      = fig_ci.add_axes(HAX_RECT)cbar_ax_ci = fig_ci.add_axes(CBAR_RECT)with warnings.catch_warnings():    warnings.simplefilter('ignore')    _, _ = multi_gtex.whorlmap(        cmap=CMAP, chop_tail=2.5, vmin=-vabs, vmax=vabs,        ax=ax_ci, heatmap_kwargs={'cbar': False, 'linewidths': 0},    )ax_ci.set_aspect('equal')for _c in ax_ci.collections:    _c.set_rasterized(True)_add_shared_cbar(cbar_ax_ci, orientation='horizontal')_mn = mean_df.valuesfor _idx, (_ri, _ci, _pi, _wi, _lbl) in enumerate(_ORDERED_CELLS):    _mean_val  = float(_mn[_ri, _ci])    _bs        = _pair_bs[_pi][_wi]    _hl_col    = _PAIR_COL[_pi]    _cell_rgba = CMAP(shared_norm(_mean_val))    _cx0, _cy0 = _ci * 21, _ri * 21    ax_ci.add_patch(_Rect((_cx0, _cy0), 21, 21,                          fill=False, edgecolor=_hl_col, linewidth=2.0, zorder=12))    ax_ci.text(_cx0 + 2.5, _cy0 + 5, _lbl,               fontsize=5.5, fontweight='bold', color=_hl_col, zorder=13, va='top', ha='left')    _sr  = SPARK_RECTS[_idx]    _sax = fig_ci.add_axes(_sr)    _xlo, _xhi = _pair_xlims[_pi]    _xr = np.linspace(_xlo, _xhi, 300)    _yr = _gkde(_bs, bw_method='silverman')(_xr)    _sax.fill_between(_xr, _yr, color=_cell_rgba, alpha=0.65)    _sax.plot(_xr, _yr, color=_hl_col, lw=0.9)    _sax.axvline(0,          color='#aaaaaa', lw=0.6, ls=(0, (3, 3)))    _sax.axvline(_mean_val,  color=_hl_col,   lw=1.2)    _sax.set_xlim(_xlo, _xhi);  _sax.set_ylim(0, _pair_ymax[_pi])    _sax.set_yticks([]);  _sax.set_xticks([0])    _sax.set_xticklabels(['0'], fontsize=5, color='#888')    for _sp in ['top', 'right', 'left', 'bottom']:        _sax.spines[_sp].set_visible(False)    _sax.tick_params(length=2, width=0.5, pad=1)    _sax.text(0.02, 0.97, _lbl, transform=_sax.transAxes,              fontsize=7, fontweight='bold', ha='left', va='top', color=_hl_col)    _sax.text(0.5, -0.15, f'{RIGHT_GENES[_ci]} / {region_order[_ri]}',              transform=_sax.transAxes, fontsize=5.5, ha='center', va='top',              style='italic', color='#444')# Orthogonal connection linesfig_ci.canvas.draw()def _d2f(_xd, _yd):    _disp = ax_ci.transData.transform((_xd, _yd))    return tuple(fig_ci.transFigure.inverted().transform(_disp))_xlim_r = ax_ci.get_xlim()[1]for _idx, (_ri, _ci, _pi, _wi, _lbl) in enumerate(_ORDERED_CELLS):    _hl_col = _PAIR_COL[_pi]    _sr = SPARK_RECTS[_idx]    _p1 = _d2f((_ci + 1) * 21, _ri * 21 + 10.5)    _p2 = _d2f(_xlim_r,         _ri * 21 + 10.5)    _p3 = (_sr[0], _sr[1] + _sr[3] / 2)    for _xs, _ys in [([_p1[0], _p2[0]], [_p1[1], _p2[1]]),                     ([_p2[0], _p3[0]], [_p2[1], _p3[1]])]:        fig_ci.add_artist(_L2D(_xs, _ys, transform=fig_ci.transFigure,                               color=_hl_col, lw=0.85, zorder=15, solid_capstyle='round'))fig_ci.savefig(IMAGES / 'panel_ci.svg', dpi=600)fig_ci.savefig(IMAGES / 'panel_ci.png', dpi=600)plt.show()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="panel-cii-scalar-heatmapthe-same-data-as-ci-but-each-cell-shows-only-the-point-estimate-of-the-mean-difference.-the-highlighted-pairs-same-a1a2b1b2-labels-have-nearly-identical-scalar-values-the-distributional-differences-visible-in-ci-are-invisible-here." class="level3">
+<h3 class="anchored" data-anchor-id="panel-cii-scalar-heatmapthe-same-data-as-ci-but-each-cell-shows-only-the-point-estimate-of-the-mean-difference.-the-highlighted-pairs-same-a1a2b1b2-labels-have-nearly-identical-scalar-values-the-distributional-differences-visible-in-ci-are-invisible-here.">4.2 Panel Cii — Scalar heatmapThe same data as Ci, but each cell shows only the point estimate of the mean difference. The highlighted pairs (same a1/a2/b1/b2 labels) have nearly identical scalar values — the distributional differences visible in Ci are invisible here.</h3>
+<div id="cell-23" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig_cii     <span class="op">=</span> plt.figure(figsize<span class="op">=</span>FIGSIZE_BOTH)ax_cii      <span class="op">=</span> fig_cii.add_axes(HAX_RECT)cbar_ax_cii <span class="op">=</span> fig_cii.add_axes(CBAR_RECT)sns.heatmap(    mean_df, ax<span class="op">=</span>ax_cii,    cmap<span class="op">=</span>CMAP, vmin<span class="op">=-</span>vabs, vmax<span class="op">=</span>vabs, center<span class="op">=</span><span class="dv">0</span>,    annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'.2f'</span>, annot_kws<span class="op">=</span>{<span class="st">'fontsize'</span>: <span class="dv">6</span>},    linewidths<span class="op">=</span><span class="dv">0</span>, linecolor<span class="op">=</span><span class="st">'none'</span>,    square<span class="op">=</span><span class="va">True</span>, cbar<span class="op">=</span><span class="va">False</span>,)<span class="cf">for</span> _c <span class="kw">in</span> ax_cii.collections:    _c.set_rasterized(<span class="va">True</span>)ax_cii.set_title(<span class="st">'Scalar mean (distribution information lost)'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)ax_cii.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>, labelsize<span class="op">=</span><span class="dv">7</span>)ax_cii.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, rotation<span class="op">=</span><span class="dv">0</span>,  labelsize<span class="op">=</span><span class="dv">7</span>)_add_shared_cbar(cbar_ax_cii, orientation<span class="op">=</span><span class="st">'horizontal'</span>)<span class="cf">for</span> _ri, _ci, _pi, _wi, _lbl <span class="kw">in</span> _ORDERED_CELLS:    _hl_col <span class="op">=</span> _PAIR_COL[_pi]    ax_cii.add_patch(_Rect((_ci, _ri), <span class="dv">1</span>, <span class="dv">1</span>,                           fill<span class="op">=</span><span class="va">False</span>, edgecolor<span class="op">=</span>_hl_col, linewidth<span class="op">=</span><span class="fl">2.0</span>, zorder<span class="op">=</span><span class="dv">12</span>))    ax_cii.text(_ci <span class="op">+</span> <span class="fl">0.06</span>, _ri <span class="op">+</span> <span class="fl">0.18</span>, _lbl,                fontsize<span class="op">=</span><span class="dv">6</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, color<span class="op">=</span>_hl_col, zorder<span class="op">=</span><span class="dv">13</span>, va<span class="op">=</span><span class="st">'top'</span>, ha<span class="op">=</span><span class="st">'left'</span>)fig_cii.savefig(IMAGES <span class="op">/</span> <span class="st">'panel_cii.svg'</span>, dpi<span class="op">=</span><span class="dv">600</span>)fig_cii.savefig(IMAGES <span class="op">/</span> <span class="st">'panel_cii.png'</span>, dpi<span class="op">=</span><span class="dv">600</span>)plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="assembly-figure-1stitch-all-saved-panel-pngs-into-a-single-600-dpi-figure-using-pil." class="level2">
+<h2 class="anchored" data-anchor-id="assembly-figure-1stitch-all-saved-panel-pngs-into-a-single-600-dpi-figure-using-pil.">5. Assembly — Figure 1Stitch all saved panel PNGs into a single 600 DPI figure using PIL.</h2>
+<div id="cell-25" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Imageimport matplotlib.pyplot <span class="im">as</span> _plt2DPI      <span class="op">=</span> <span class="dv">600</span><span class="er">GAP_PX</span>   <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="fl">0.07</span> <span class="op">*</span> DPI))LABEL_PT <span class="op">=</span> <span class="dv">13</span><span class="er">def</span> _load(name):    <span class="cf">return</span> Image.<span class="bu">open</span>(IMAGES <span class="op">/</span> name).convert(<span class="st">'RGB'</span>)<span class="kw">def</span> _scale_to_w(img, target_w):    h <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(img.height <span class="op">*</span> target_w <span class="op">/</span> img.width))    <span class="cf">return</span> img.resize((target_w, h), Image.LANCZOS)p_ai <span class="op">=</span> _load(<span class="st">'panel_ai.png'</span>)<span class="op">;</span>  p_a <span class="op">=</span> _load(<span class="st">'panel_a.png'</span>)_h_a       <span class="op">=</span> p_a.height_w_ai_s    <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(p_ai.width <span class="op">*</span> _h_a <span class="op">/</span> p_ai.height))_p_ai_h    <span class="op">=</span> p_ai.resize((_w_ai_s, _h_a), Image.LANCZOS)_raw_w     <span class="op">=</span> _w_ai_s <span class="op">+</span> p_a.widthTARGET_W_PX <span class="op">=</span> <span class="bu">max</span>(_raw_w, _load(<span class="st">'panel_b.png'</span>).width,                  _load(<span class="st">'panel_ci.png'</span>).width, _load(<span class="st">'panel_cii.png'</span>).width)_f       <span class="op">=</span> TARGET_W_PX <span class="op">/</span> _raw_w_row_a_h <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(_h_a <span class="op">*</span> _f))_p_ai_f  <span class="op">=</span> _p_ai_h.resize((<span class="bu">int</span>(<span class="bu">round</span>(_w_ai_s <span class="op">*</span> _f)), _row_a_h), Image.LANCZOS)_p_a_f   <span class="op">=</span> p_a.resize((<span class="bu">int</span>(<span class="bu">round</span>(p_a.width <span class="op">*</span> _f)), _row_a_h), Image.LANCZOS)row_a    <span class="op">=</span> Image.new(<span class="st">'RGB'</span>, (TARGET_W_PX, _row_a_h), (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>))row_a.paste(_p_ai_f, (<span class="dv">0</span>, <span class="dv">0</span>))<span class="op">;</span>  row_a.paste(_p_a_f, (_p_ai_f.width, <span class="dv">0</span>))row_b   <span class="op">=</span> _scale_to_w(_load(<span class="st">'panel_b.png'</span>),   TARGET_W_PX)row_ci  <span class="op">=</span> _scale_to_w(_load(<span class="st">'panel_ci.png'</span>),  TARGET_W_PX)row_cii <span class="op">=</span> _scale_to_w(_load(<span class="st">'panel_cii.png'</span>), TARGET_W_PX)gap      <span class="op">=</span> Image.new(<span class="st">'RGB'</span>, (TARGET_W_PX, GAP_PX), (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>))_rows    <span class="op">=</span> [row_a, gap, row_b, gap, row_ci, gap, row_cii]TOTAL_H_PX <span class="op">=</span> <span class="bu">sum</span>(r.height <span class="cf">for</span> r <span class="kw">in</span> _rows)combined <span class="op">=</span> Image.new(<span class="st">'RGB'</span>, (TARGET_W_PX, TOTAL_H_PX), (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>))_y <span class="op">=</span> <span class="dv">0</span><span class="er">for</span> _r <span class="kw">in</span> _rows:    combined.paste(_r, (<span class="dv">0</span>, _y))<span class="op">;</span>  _y <span class="op">+=</span> _r.height_y_a   <span class="op">=</span> <span class="dv">0</span><span class="er">_y_b</span>   <span class="op">=</span> row_a.height <span class="op">+</span> GAP_PX_y_ci  <span class="op">=</span> _y_b <span class="op">+</span> row_b.height <span class="op">+</span> GAP_PX_y_cii <span class="op">=</span> _y_ci <span class="op">+</span> row_ci.height <span class="op">+</span> GAP_PX_LOFF <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="fl">0.012</span> <span class="op">*</span> DPI))_YOFF <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="fl">0.03</span>  <span class="op">*</span> DPI))_col_b <span class="op">=</span> TARGET_W_PX <span class="op">/</span> <span class="dv">5l</span><span class="er">abels</span> <span class="op">=</span> {    <span class="st">'Ai'</span>:   (_LOFF,                              _y_a   <span class="op">+</span> _YOFF),    <span class="st">'Aii'</span>:  (_p_ai_f.width <span class="op">+</span> _LOFF,             _y_a   <span class="op">+</span> _YOFF),    <span class="st">'Aiii'</span>: (_p_ai_f.width <span class="op">+</span> <span class="bu">int</span>(_p_a_f.width <span class="op">*</span> <span class="fl">0.41</span>) <span class="op">+</span> _LOFF, _y_a <span class="op">+</span> _YOFF),    <span class="st">'Bi'</span>:   (<span class="bu">int</span>(_col_b<span class="op">*</span><span class="dv">0</span>) <span class="op">+</span> _LOFF, _y_b <span class="op">+</span> _YOFF),    <span class="st">'Bii'</span>:  (<span class="bu">int</span>(_col_b<span class="op">*</span><span class="dv">1</span>) <span class="op">+</span> _LOFF, _y_b <span class="op">+</span> _YOFF),    <span class="st">'Biii'</span>: (<span class="bu">int</span>(_col_b<span class="op">*</span><span class="dv">2</span>) <span class="op">+</span> _LOFF, _y_b <span class="op">+</span> _YOFF),    <span class="st">'Biv'</span>:  (<span class="bu">int</span>(_col_b<span class="op">*</span><span class="dv">3</span>) <span class="op">+</span> _LOFF, _y_b <span class="op">+</span> _YOFF),    <span class="st">'Bv'</span>:   (<span class="bu">int</span>(_col_b<span class="op">*</span><span class="dv">4</span>) <span class="op">+</span> _LOFF, _y_b <span class="op">+</span> _YOFF),    <span class="st">'Ci'</span>:   (_LOFF, _y_ci  <span class="op">+</span> _YOFF),    <span class="st">'Cii'</span>:  (_LOFF, _y_cii <span class="op">+</span> _YOFF),}_fig_w <span class="op">=</span> TARGET_W_PX <span class="op">/</span> DPI<span class="op">;</span>  _fig_h <span class="op">=</span> TOTAL_H_PX <span class="op">/</span> DPI_fig, _ax <span class="op">=</span> _plt2.subplots(figsize<span class="op">=</span>(_fig_w, _fig_h))_fig.subplots_adjust(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)_ax.imshow(np.asarray(combined), aspect<span class="op">=</span><span class="st">'auto'</span>)_ax.axis(<span class="st">'off'</span>)<span class="cf">for</span> _txt, (_px, _py) <span class="kw">in</span> labels.items():    _ax.text(_px, _py, _txt, fontsize<span class="op">=</span>LABEL_PT, fontweight<span class="op">=</span><span class="st">'bold'</span>,             fontfamily<span class="op">=</span><span class="st">'Arial'</span>, color<span class="op">=</span><span class="st">'black'</span>, va<span class="op">=</span><span class="st">'top'</span>, ha<span class="op">=</span><span class="st">'left'</span>,             transform<span class="op">=</span>_ax.transData)out_png <span class="op">=</span> IMAGES <span class="op">/</span> <span class="st">'figure1_assembly.png'</span>_fig.savefig(out_png, dpi<span class="op">=</span>DPI, bbox_inches<span class="op">=</span><span class="st">'tight'</span>, pad_inches<span class="op">=</span><span class="dv">0</span>)_plt2.close(_fig)<span class="bu">print</span>(<span class="ss">f'Saved </span><span class="sc">{</span>out_png<span class="sc">}</span><span class="ss">  (</span><span class="sc">{</span>out_png<span class="sc">.</span>stat()<span class="sc">.</span>st_size <span class="op">/</span> <span class="fl">1e6</span><span class="sc">:.1f}</span><span class="ss"> MB)'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="final-figure-1" class="level3">
+<h3 class="anchored" data-anchor-id="final-figure-1">Final Figure 1</h3>
+<div id="cell-27" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>display(IPImage(<span class="bu">str</span>(IMAGES <span class="op">/</span> <span class="st">'figure1_assembly.png'</span>), width<span class="op">=</span><span class="dv">1000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/sangyu\.github\.io\/whorlmap-paper");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

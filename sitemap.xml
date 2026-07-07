@@ -2,26 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sangyu.github.io/whorlmap-paper/index.html</loc>
-    <lastmod>2026-06-30T03:59:21.948Z</lastmod>
+    <lastmod>2026-07-07T07:37:18.237Z</lastmod>
   </url>
   <url>
     <loc>https://sangyu.github.io/whorlmap-paper/nbs/helpers/survey.html</loc>
-    <lastmod>2026-06-30T03:59:22.005Z</lastmod>
+    <lastmod>2026-07-07T07:37:18.338Z</lastmod>
   </url>
   <url>
     <loc>https://sangyu.github.io/whorlmap-paper/nbs/alternatives/spiral_variants_executed.html</loc>
-    <lastmod>2026-06-30T03:59:21.957Z</lastmod>
+    <lastmod>2026-07-07T07:37:18.244Z</lastmod>
   </url>
   <url>
     <loc>https://sangyu.github.io/whorlmap-paper/nbs/figure1.html</loc>
-    <lastmod>2026-06-30T03:59:22.000Z</lastmod>
+    <lastmod>2026-07-07T07:37:18.299Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sangyu.github.io/whorlmap-paper/nbs/whorlmap_demo_colab.html</loc>
+    <lastmod>2026-07-07T07:37:18.338Z</lastmod>
   </url>
   <url>
     <loc>https://sangyu.github.io/whorlmap-paper/nbs/alternatives/spiral_variants.html</loc>
-    <lastmod>2026-06-30T03:59:21.953Z</lastmod>
+    <lastmod>2026-07-07T07:37:18.241Z</lastmod>
   </url>
   <url>
     <loc>https://sangyu.github.io/whorlmap-paper/nbs/helpers/make_cache.html</loc>
-    <lastmod>2026-06-30T03:59:22.004Z</lastmod>
+    <lastmod>2026-07-07T07:37:18.338Z</lastmod>
   </url>
 </urlset>
