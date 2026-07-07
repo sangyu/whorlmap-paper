@@ -1,5 +1,8 @@
 project:
   type: website
+  resources:
+    - nbs/images/figure1_assembly.png
+    - nbs/images/figure1_assembly.svg
 
 website:
   title: "Whorlmap"
