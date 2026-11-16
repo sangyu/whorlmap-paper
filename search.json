@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Whorlmap Working Paper",
     "section": "",
-    "text": "Analysis and figures for a technical paper documenting the design and application of whorlmap, the uncertainty aware heatmap.\nWhorlmap is a compact heatmap design for high-dimensional comparisons where each cell encodes a full bootstrapped effect size distribution as a tiny spiral, rather than collapsing uncertainty into a single color. It lets readers scan many treatment–outcome contrasts at once while still seeing direction, magnitude, and uncertainty inside each cell. (Read more on why effect size estimation (and the replication crisis)? and why bootstrap?)"
+    "text": "Analysis and figures for a technical paper documenting the design and application of whorlmap, the uncertainty aware heatmap.\nWhorlmap is a compact heatmap design for high-dimensional comparisons where each cell encodes a full bootstrapped effect size distribution as a tiny spiral, rather than collapsing uncertainty into a single color. It lets readers scan many treatment–outcome contrasts at once while still seeing direction, magnitude, and uncertainty inside each cell. (Read more on effect size estimation (and the replication crisis)? and why bootstrap?)"
   },
   {
     "objectID": "index.html#notebooks",
