@@ -34,6 +34,7 @@ format:
     lightbox: true
     fig-responsive: true
     css: custom.css
+    include-after-body: lightbox-width.html
 
 execute:
   eval: false      # render stored cell outputs only; re-run notebooks locally

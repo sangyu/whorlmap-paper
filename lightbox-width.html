@@ -1,0 +1,26 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const lightbox = window.lightboxQuarto;
+  if (!lightbox) return;
+
+  // Let touch gestures scroll the figure instead of changing/closing slides.
+  lightbox.settings.touchNavigation = false;
+  lightbox.on("slide_before_load", ({ slideNode, slideConfig }) => {
+    if (slideConfig.type !== "image") return;
+    slideNode.classList.add("figure-width-view");
+    slideNode.tabIndex = -1;
+    slideConfig.zoomable = false;
+    slideConfig.draggable = false;
+  });
+
+  const startAtTop = () => {
+    const slide = lightbox.getActiveSlide();
+    if (!slide?.classList.contains("figure-width-view")) return;
+    slide.scrollTop = 0;
+    // Allow arrow keys and Page Down to scroll; Escape still closes the viewer.
+    slide.focus({ preventScroll: true });
+  };
+  lightbox.on("open", startAtTop);
+  lightbox.on("slide_changed", startAtTop);
+});
+</script>

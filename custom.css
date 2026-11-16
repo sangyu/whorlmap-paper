@@ -3,3 +3,45 @@
   height: auto;
   width: auto;
 }
+
+/* Keep long figure legends on the page, leaving the lightbox for the image.
+   display: none also prevents GLightbox from reserving caption height. */
+.glightbox-container .gslide-description {
+  display: none;
+}
+
+/* Fit figures to the browser width and scroll within the overlay. */
+.glightbox-container {
+  touch-action: pan-y;
+}
+
+.glightbox-container .gslide.figure-width-view {
+  display: block;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 56px clamp(16px, 4vw, 64px) 24px;
+  box-sizing: border-box;
+}
+
+.figure-width-view .ginner-container {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+.figure-width-view .gslide-image {
+  width: 100%;
+}
+
+.figure-width-view .gslide-image img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  /* Override GLightbox's inline viewport-height limit. */
+  max-height: none !important;
+  min-width: 0;
+  touch-action: pan-y;
+  cursor: default;
+}
